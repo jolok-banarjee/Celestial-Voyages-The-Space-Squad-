@@ -1,0 +1,46 @@
+#custom-itineraries{
+    background-color: none;
+}
+
+#custom-itineraries h1{
+    background-color: none;
+}
+
+.itineraries {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img {
+    height: 100vh;
+    width: -webkit-fill-available;
+}
+
+.itinerary-option {
+    margin: 20px;
+    padding: 20px;
+    width: 45%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: transform 0.2s ease-in-out;
+}
+
+.itinerary-option a {
+    text-decoration: none;
+    color: #333;
+}
+
+.itinerary-option h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.itinerary-option p {
+    font-size: 16px;
+    color: #777;
+}
+
+.itinerary-option:hover {
+    transform: scale(1.05);
+}

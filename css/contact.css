@@ -1,0 +1,53 @@
+h1 {
+    color: black;
+    text-align: center;
+    padding: 10px;
+}
+
+section {
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.contact-form {
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.contact-form {
+    padding-left: 20px;
+    margin-left: 20px;
+}
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,67 @@
+.embark body {
+    font-family: Arial, sans-serif;
+    background-color: #1BABB1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#logo {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    background-image: url('Image/icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.embark h1 {
+    text-align: center;
+    font-size: 24px;
+    background-color: #1BABB1;
+}
+
+.embark pre {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 20px;
+    margin: 20px 0;
+}
+.embark {
+    background-color: #1BABB1;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+@font-face {
+    src: url();
+    font-family: 'Phudu', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}

@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box
+}
+
+
+.image-slideshow {
+  max-width: 1265px;
+  position: relative;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+}
+
+img {
+  width: 100%;
+  justify-content: center;
+
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 2s;
+}
+
+@keyframes fade {
+  from {
+    opacity: .5
+  }
+
+  to {
+    opacity: 1
+  }
+
+  0% {
+    left: 0%;
+  }
+
+  20% {
+    left: 0%;
+  }
+
+  25% {
+    left: -100%;
+  }
+
+  45% {
+    left: -100%;
+  }
+
+  50% {
+    left: -200%;
+  }
+
+  70% {
+    left: -200%;
+  }
+
+  75% {
+    left: -300%;
+  }
+
+  95% {
+    left: -300%;
+  }
+
+  100% {
+    left: -400%;
+  }
+}

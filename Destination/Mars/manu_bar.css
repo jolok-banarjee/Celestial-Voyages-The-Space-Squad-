@@ -1,0 +1,35 @@
+/* Style the menu bar container */
+.menu-bar {
+    background-color: #333; /* Background color */
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Style the menu list */
+.menu-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Style each menu item */
+.menu-item {
+    margin: 0;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+/* Style the menu item links */
+.menu-item a {
+    text-decoration: none;
+    color: #fff; /* Text color */
+    font-size: 18px; /* Font size */
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+/* Change text color on hover */
+.menu-item a:hover {
+    color: #FF5733; /* Hover color */
+}

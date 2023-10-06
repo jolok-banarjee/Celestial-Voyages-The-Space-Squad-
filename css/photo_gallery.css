@@ -1,0 +1,39 @@
+#photo-gallery {
+    background-color: #1BABB1;
+}
+
+#photo-gallery h1 {
+    background-color: #1BABB1;
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.caption {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
