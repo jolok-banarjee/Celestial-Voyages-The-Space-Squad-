@@ -30,7 +30,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
 
         /* ===== HERO CAROUSEL - FIXED ===== */
-        .hero-carousel { position: relative; width: 100%; }
+        .hero-carousel { position: relative; width: 100%; overflow: hidden; }
         .hero-carousel .carousel-item { 
             height: 100vh; 
             min-height: 600px; 
@@ -565,21 +565,22 @@
            MOBILE RESPONSIVE FIXES
            ============================================ */
         @media (max-width: 768px) {
-            /* Hero carousel mobile fixes */
+            /* Hero carousel mobile fixes - SMALLER HEIGHT */
             .hero-carousel .carousel-item { 
-                height: 100vh; 
-                min-height: 500px; 
+                height: 65vh; 
+                min-height: 450px; 
+                max-height: 600px;
             }
             .carousel-caption { 
                 padding: 1rem;
                 justify-content: center;
             }
             .carousel-caption h2 {
-                font-size: clamp(1.8rem, 8vw, 2.5rem);
+                font-size: clamp(1.6rem, 7vw, 2.2rem);
                 margin-bottom: 0.6rem;
             }
             .carousel-caption p {
-                font-size: 1rem;
+                font-size: 0.95rem;
                 margin-bottom: 1.2rem;
                 padding: 0 0.5rem;
             }
@@ -629,14 +630,32 @@
         }
 
         @media (max-width: 480px) {
+            /* Hero carousel extra small screens */
             .hero-carousel .carousel-item { 
-                min-height: 450px; 
+                height: 55vh; 
+                min-height: 380px; 
+                max-height: 500px;
             }
             .carousel-caption h2 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+                line-height: 1.15;
             }
             .carousel-caption p {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+            .carousel-caption .btn-hero {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .carousel-indicators button {
+                width: 10px !important;
+                height: 10px !important;
+                margin: 0 4px;
+            }
+            .carousel-control-prev, .carousel-control-next { 
+                width: 36px; 
+                height: 36px;
             }
             .navbar-brand h1 { font-size: 1rem !important; }
             .nav-btn { 
