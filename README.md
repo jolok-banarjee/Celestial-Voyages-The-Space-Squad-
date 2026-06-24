@@ -176,7 +176,7 @@ celestial-voyages/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/celestial-voyages.git
+   git clone https://github.com/jolok-banarjee/celestial-voyages.git
    cd celestial-voyages
    ```
 
