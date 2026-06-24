@@ -1,0 +1,14 @@
+#about-us { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
+#about-us h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+.team, .mission-vision, .unique-selling-point { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; transition: var(--transition); }
+.team:hover, .mission-vision:hover, .unique-selling-point:hover { border-color: var(--border-glow); box-shadow: 0 0 20px var(--accent-glow); }
+.team h2, .mission-vision h2, .unique-selling-point h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 0.8rem; }
+.team p, .mission-vision p, .unique-selling-point p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+.mission-vision strong { color: var(--accent); }
+.embark { max-width: 800px; margin: 3rem auto; padding: 3rem 2rem; text-align: center; background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; position: relative; overflow: hidden; }
+.embark::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(233,69,96,0.1) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
+.embark h1 { font-size: 2.5rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+.embark pre { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem; font-family: inherit; white-space: pre-wrap; position: relative; z-index: 1; }
+.embark .buttons { position: relative; z-index: 1; }
+.embark .button { display: inline-block; background: linear-gradient(135deg, var(--accent) 0%, #c73e54 100%); color: white; text-decoration: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: var(--transition); box-shadow: 0 4px 15px rgba(233,69,96,0.3); }
+.embark .button:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(233,69,96,0.5); }

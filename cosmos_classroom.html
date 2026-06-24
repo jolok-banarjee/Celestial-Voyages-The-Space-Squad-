@@ -1,93 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Image/icon.png">
-    <title>Explore the Universe with Us | Premium Tourism Services</title>
-    <meta name="description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <meta name="keywords"
-        content="explore the universe, ultimate adventure, premium tourism services, discover new frontiers, unforgettable memories, Space Travel, Dhaka, travel experience, weekend getaway, month-long adventure, experienced professionals, book your ticket, wide range of travel packages, luxury cruises, backpacking adventures, plan the trip of a lifetime">
+    <title>Cosmos Classroom | Celestial Voyages</title>
+    <meta name="description" content="Experience the ultimate adventure with our premium space tourism services.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cosmos_classroom.css">
+    <style>
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--bg-dark, #0f0f23);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-ring {
+            width: 60px; height: 60px; border: 3px solid rgba(233,69,96,0.2);
+            border-top-color: #e94560; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-    <meta property="og:title" content="Explore the Universe with Us | Premium Tourism Services">
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <meta name="robots" content="noindex,nofollow" />
-    
-    <meta http-equiv="content-language" content="en" />
-    <link rel="stylesheet" href="css/cosmos_classroom.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/slide.css">
-    <link rel="stylesheet" href="css/contact.css">
+        /* ===== NAVBAR ===== */
+        .navbar { padding: 0.6rem 0 !important; transition: all 0.3s ease; }
+        .navbar.scrolled {
+            background: rgba(15,15,35,0.98) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 0.4rem 0 !important;
+        }
+        .navbar-brand h1 {
+            font-size: 1.4rem !important; font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            letter-spacing: 0.5px; margin: 0;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light, #f5f5f5); border-radius: 50px;
+            padding: 0.4rem 1.2rem; font-size: 0.85rem; font-weight: 500;
+            transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-btn:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: #fff; transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .navbar-nav { gap: 0.3rem; }
+        .navbar-nav .nav-link {
+            color: var(--text-muted, #a0a0a0) !important;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.5rem 0.9rem !important; border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--accent, #e94560) !important;
+            background: rgba(233,69,96,0.1);
+        }
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.6rem;
+        }
+        .navbar-collapse {
+            background: rgba(15,15,35,0.98);
+            padding: 1rem; border-radius: 12px; margin-top: 0.5rem;
+        }
+        .navbar-collapse:not(.show) { display: none; }
+        @media (min-width: 992px) {
+            .navbar-collapse, .navbar-collapse:not(.show), .navbar-collapse.collapse {
+                display: flex !important; flex-basis: auto;
+                background: transparent; padding: 0; margin-top: 0;
+            }
+            .navbar-nav { flex-direction: row; }
+            .navbar-toggler { display: none !important; }
+        }
 
+        /* ===== HERO BANNER ===== */
+        .page-hero {
+            position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 500px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .page-hero img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; filter: brightness(0.4);
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(15,15,35,0.3) 0%, rgba(15,15,35,0.8) 100%);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 0 1rem;
+        }
+        .page-hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .page-hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.8);
+            max-width: 600px; margin: 0 auto;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 3rem; margin-top: 1.5rem;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 1.8rem; font-weight: 800; color: var(--accent, #e94560); }
+        .hero-stat .label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h1 { margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-muted, #a0a0a0); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+        .section-divider {
+            width: 60px; height: 4px; border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent, #e94560), transparent);
+            margin: 0 auto 1.5rem;
+        }
+
+        /* ===== CONTENT CARDS ===== */
+        #educational-content { max-width: 1200px; margin: 0 auto; padding: 4rem 1rem; }
+        .content-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .content-item {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .content-item::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--accent, #e94560), #f4d03f);
+            opacity: 0; transition: opacity 0.4s ease; z-index: 2;
+        }
+        .content-item:hover::before { opacity: 1; }
+        .content-item:hover {
+            border-color: var(--border-glow, rgba(233,69,96,0.4));
+            box-shadow: 0 0 40px var(--accent-glow, rgba(233,69,96,0.3));
+            transform: translateY(-8px);
+        }
+        .content-item a { text-decoration: none; color: inherit; display: block; }
+        .content-image-wrap { position: relative; overflow: hidden; aspect-ratio: 16/10; }
+        .content-image-wrap img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .content-item:hover .content-image-wrap img { transform: scale(1.08); }
+        .content-icon {
+            position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+            width: 50px; height: 50px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.4);
+            z-index: 3;
+        }
+        .content-body { padding: 2rem 1.5rem 1.5rem; text-align: center; }
+        .content-body h2 {
+            font-size: 1.3rem; color: var(--text-light, #f5f5f5);
+            margin-bottom: 0.5rem;
+        }
+        .content-body p {
+            color: var(--text-muted, #a0a0a0); font-size: 0.9rem;
+            line-height: 1.6; margin-bottom: 1rem;
+        }
+        .content-footer {
+            padding: 0 1.5rem 1.5rem;
+            display: flex; justify-content: center;
+        }
+        .btn-explore {
+            background: transparent; border: 2px solid var(--accent, #e94560);
+            color: var(--accent, #e94560); border-radius: 50px;
+            padding: 0.5rem 1.5rem; font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; transition: all 0.3s ease;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .btn-explore:hover {
+            background: var(--accent, #e94560); color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233,69,96,0.5);
+        }
+        .external-badge {
+            position: absolute; top: 1rem; right: 1rem;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+            color: rgba(255,255,255,0.8); font-size: 0.65rem; font-weight: 600;
+            padding: 0.25rem 0.6rem; border-radius: 50px;
+            text-transform: uppercase; letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* ===== FOOTER ===== */
+        footer { padding: 3rem 1rem; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted, #a0a0a0); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent, #e94560); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted, #a0a0a0); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: all 0.3s ease; text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: white; transform: translateY(-2px);
+        }
+        .developer-credit {
+            text-align: center; margin-top: 1.5rem;
+            padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .developer-credit p { color: var(--text-muted, #a0a0a0); font-size: 0.9rem; margin: 0; }
+        .developer-credit a {
+            color: var(--accent, #e94560); text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+        }
+        .developer-credit a:hover { color: #fff; text-shadow: 0 0 10px rgba(233,69,96,0.5); }
+        .developer-credit i { margin-right: 0.3rem; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; color: white; font-size: 1.1rem;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease; z-index: 999;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.4);
+            display: flex; align-items: center; justify-content: center;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+
+        @media (max-width: 768px) {
+            .hero-stats { gap: 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
-
 <body>
-    <nav class="navbar navbar-dark bg-dark py-1">
-        <div class="container-fluid">
-          <a class="navbar-brand"><h1 style="color: white; font-size: xx-large; align-self: flex-start;">Celestial Voyages: A Dream Come True</h1></a>
-          <h2 class="d-flex"  style="color: white; font-size: large;">
-            My account
-          </h2>
-        </div>
-      </nav>
+    <!-- Preloader -->
+    <div id="preloader"><div class="loader-ring"></div></div>
 
-    <section id="educational-content">
-        <!-- Content for educational content -->
-        <h1>Educational Content</h1>
-        <p>Embark on a journey of enlightenment with our educational content. Delve into a diverse range of subjects, from science to the arts, meticulously curated to inspire curiosity. Engage with expertly crafted articles, videos, and courses tailored to various learning styles. Join a community of passionate learners, and unlock the doors to a world of boundless knowledge.</p>
-        <div class="content-items">
-            <div class="content-item">
-                <h2>Solar System</h2>
-                <a href="Solar_System.html">
-                    <img src="Image/solar_system.jpg" alt="Solar System">
-                    <p>Exploring the Cosmic Symphony: Our Solar System's Majestic Wonders.</p>
-                </a>
+    <canvas id="stars" class="stars"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><h1>Celestial Voyages: A Dream Come True</h1></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="space_adventure.html">Adventures</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cosmos_classroom.html">Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vr.html">VR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="travel_experience.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-lg-3">
+                    <a href="ticket.html" class="nav-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="signup.html" class="nav-btn"><i class="fas fa-user"></i> My Account</a>
+                </div>
             </div>
-            <div class="content-item">
-                <h2>Planets</h2>
-                <a href="Planets.html">
-                    <img src="Image/planets.jpg" alt="Planets">
-                    <p>Worlds Beyond: Exploring the Planets of Our Solar System.</p>
-                </a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="page-hero" style="padding:0; max-width:100%;">
+        <img src="Image/cosmos.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Cosmos Classroom">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Cosmos Classroom</h1>
+            <p>Embark on a journey of enlightenment. Explore the wonders of our universe through curated educational content.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="num">5</div><div class="label">Topics</div></div>
+                <div class="hero-stat"><div class="num">50+</div><div class="label">Lessons</div></div>
+                <div class="hero-stat"><div class="num">Free</div><div class="label">Access</div></div>
             </div>
-            <div class="content-item">
-                <h2>Moons</h2>
-                <a href="Moons.html">
-                <img src="Image/moon2.jpg" alt="Moons">
-                <p>Mystical Marvel: Journeying to the Moon.</p>
-                </a>
-            </div>
-            <div class="content-item">
-                <h2>Spacecraft</h2>
-                <a href="https://solarsystem.nasa.gov/basics/chapter9-1/" target="_blank">
-                    <img src="Image/spacecraft.jpg" alt="Spacecraft">
-                    <p>Voyage to the Stars: The Marvelous World of Spacecraft.</p>
-                </a>
-            </div>
-            <div class="content-item">
-                <h2>Missions</h2>
-                <a href="https://solarsystem.nasa.gov/missions/?order=launch_date+desc&per_page=50&page=0&search=&fs=&fc=&ft=&dp=&category="
-                    target="_blank">
-                    <img src="Image/missions.jpg" alt="Missions">
-                    <p>Beyond the Horizon: Space Missions Unveiling the Cosmos.</p>
-                </a>
-            </div>
-            <!-- Add more content items as needed -->
         </div>
     </section>
 
+    <!-- Educational Content -->
+    <section id="educational-content">
+        <div class="section-header reveal">
+            <h1>Explore the Universe</h1>
+            <div class="section-divider"></div>
+            <p>Delve into a diverse range of subjects, from planetary science to space missions, meticulously curated to inspire curiosity.</p>
+        </div>
+        <div class="content-items">
+            <div class="content-item reveal reveal-delay-1">
+                <a href="Solar_System.html">
+                    <div class="content-image-wrap">
+                        <img src="Image/solar_system.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Solar System">
+                        <div class="content-icon"><i class="fas fa-sun"></i></div>
+                    </div>
+                    <div class="content-body">
+                        <h2>Solar System</h2>
+                        <p>Exploring the Cosmic Symphony: Our Solar System's Majestic Wonders from the Sun to the edge of the Oort Cloud.</p>
+                    </div>
+                    <div class="content-footer">
+                        <span class="btn-explore">Start Learning <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+            <div class="content-item reveal reveal-delay-2">
+                <a href="Planets.html">
+                    <div class="content-image-wrap">
+                        <img src="Image/planets.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Planets">
+                        <div class="content-icon"><i class="fas fa-globe"></i></div>
+                    </div>
+                    <div class="content-body">
+                        <h2>Planets</h2>
+                        <p>Worlds Beyond: Exploring the eight major planets of Our Solar System, each with unique characteristics and mysteries.</p>
+                    </div>
+                    <div class="content-footer">
+                        <span class="btn-explore">Start Learning <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+            <div class="content-item reveal reveal-delay-3">
+                <a href="Moons.html">
+                    <div class="content-image-wrap">
+                        <img src="Image/moon2.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Moons">
+                        <div class="content-icon"><i class="fas fa-moon"></i></div>
+                    </div>
+                    <div class="content-body">
+                        <h2>Moons</h2>
+                        <p>Mystical Marvel: Journeying to the natural satellites that orbit planets, from Earth's Moon to Jupiter's 95 moons.</p>
+                    </div>
+                    <div class="content-footer">
+                        <span class="btn-explore">Start Learning <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+            <div class="content-item reveal reveal-delay-4">
+                <a href="https://solarsystem.nasa.gov/basics/chapter9-1/" target="_blank" rel="noopener noreferrer">
+                    <div class="content-image-wrap">
+                        <img src="Image/spacecraft.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Spacecraft">
+                        <span class="external-badge"><i class="fas fa-external-link-alt"></i> External</span>
+                        <div class="content-icon"><i class="fas fa-space-shuttle"></i></div>
+                    </div>
+                    <div class="content-body">
+                        <h2>Spacecraft</h2>
+                        <p>Voyage to the Stars: The Marvelous World of Spacecraft engineering and the vessels that carry us beyond Earth.</p>
+                    </div>
+                    <div class="content-footer">
+                        <span class="btn-explore">Explore <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+            <div class="content-item reveal reveal-delay-5">
+                <a href="https://solarsystem.nasa.gov/missions/" target="_blank" rel="noopener noreferrer">
+                    <div class="content-image-wrap">
+                        <img src="Image/missions.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Missions">
+                        <span class="external-badge"><i class="fas fa-external-link-alt"></i> External</span>
+                        <div class="content-icon"><i class="fas fa-flag"></i></div>
+                    </div>
+                    <div class="content-body">
+                        <h2>Missions</h2>
+                        <p>Beyond the Horizon: Space Missions Unveiling the Cosmos, from Apollo to Artemis and beyond.</p>
+                    </div>
+                    <div class="content-footer">
+                        <span class="btn-explore">Explore <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p style="text-align: center;">&copy; 2023 Celestial Voyages. All rights reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2026 Celestial Voyages. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="space_adventure.html">Adventures</a>
+                <a href="cosmos_classroom.html">Learn</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <p>Designed & Developed by <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Jolok Banarjee</a></p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Back to Top -->
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/stars.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 400);
+        });
+
+        // Navbar scroll effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll Reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
-
 </html>

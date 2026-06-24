@@ -1,113 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Image/icon.png">
-    <title>Explore the Universe with Us | Premium Tourism Services</title>
-    <meta name="description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <meta name="keywords"
-        content="explore the universe, ultimate adventure, premium tourism services, discover new frontiers, unforgettable memories, Space Travel, Dhaka, travel experience, weekend getaway, month-long adventure, experienced professionals, book your ticket, wide range of travel packages, luxury cruises, backpacking adventures, plan the trip of a lifetime">
-
-    <meta property="og:title" content="Explore the Universe with Us | Premium Tourism Services">
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <meta name="robots" content="noindex,nofollow" />
-    <meta http-equiv="content-language" content="en" />
-    <link rel="stylesheet" href="css/cosmos_classroom.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/slide.css">
-    <link rel="stylesheet" href="css/contact.css">
-
+    <title>Planets | Celestial Voyages</title>
+    <meta name="description" content="Explore the eight major planets of our Solar System with Celestial Voyages.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cosmos_classroom.css">
+    <style>
+        #preloader { position: fixed; inset: 0; z-index: 9999; background: var(--bg-dark, #0f0f23); display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-ring { width: 60px; height: 60px; border: 3px solid rgba(233,69,96,0.2); border-top-color: #e94560; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .navbar { padding: 0.6rem 0 !important; transition: all 0.3s ease; }
+        .navbar.scrolled { background: rgba(15,15,35,0.98) !important; box-shadow: 0 4px 20px rgba(0,0,0,0.3); padding: 0.4rem 0 !important; }
+        .navbar-brand h1 { font-size: 1.4rem !important; font-weight: 700; background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 0.5px; margin: 0; }
+        .nav-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-light, #f5f5f5); border-radius: 50px; padding: 0.4rem 1.2rem; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .nav-btn:hover { background: var(--accent, #e94560); border-color: var(--accent, #e94560); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(233,69,96,0.3); }
+        .navbar-nav { gap: 0.3rem; }
+        .navbar-nav .nav-link { color: var(--text-muted, #a0a0a0) !important; font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.9rem !important; border-radius: 50px; transition: all 0.3s ease; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--accent, #e94560) !important; background: rgba(233,69,96,0.1); }
+        .navbar-toggler { border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 0.6rem; }
+        .navbar-collapse { background: rgba(15,15,35,0.98); padding: 1rem; border-radius: 12px; margin-top: 0.5rem; }
+        @media (min-width: 992px) { .navbar-collapse { display: flex !important; flex-basis: auto; background: transparent; padding: 0; margin-top: 0; } .navbar-nav { flex-direction: row; } .navbar-toggler { display: none !important; } }
+        .page-hero { position: relative; width: 100%; height: 40vh; min-height: 300px; max-height: 450px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .page-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
+        .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,15,35,0.3) 0%, rgba(15,15,35,0.9) 100%); }
+        .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1rem; }
+        .page-hero-content h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; background: linear-gradient(135deg, #fff 0%, #f4d03f 50%, var(--accent, #e94560) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .page-hero-content p { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto; }
+        footer { padding: 3rem 1rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted, #a0a0a0); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent, #e94560); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted, #a0a0a0); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.3s ease; text-decoration: none; }
+        .social-links a:hover { background: var(--accent, #e94560); border-color: var(--accent, #e94560); color: white; transform: translateY(-2px); }
+        .developer-credit { text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .developer-credit p { color: var(--text-muted, #a0a0a0); font-size: 0.9rem; margin: 0; }
+        .developer-credit a { color: var(--accent, #e94560); text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .developer-credit a:hover { color: #fff; text-shadow: 0 0 10px rgba(233,69,96,0.5); }
+        #backToTop { position: fixed; bottom: 2rem; right: 2rem; width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%); border: none; color: white; font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 4px 15px rgba(233,69,96,0.4); display: flex; align-items: center; justify-content: center; }
+        #backToTop.visible { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+        @media (max-width: 768px) { .footer-content { flex-direction: column; text-align: center; } }
+    </style>
 </head>
-
 <body>
-    <nav class="navbar navbar-dark bg-dark py-1">
+    <div id="preloader"><div class="loader-ring"></div></div>
+    <canvas id="stars" class="stars"></canvas>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1" id="mainNav">
         <div class="container-fluid">
-          <a class="navbar-brand"><h1 style="color: white; font-size: xx-large; align-self: flex-start;">Celestial Voyages: A Dream Come True</h1></a>
-          <h2 class="d-flex"  style="color: white; font-size: large;">
-            My account
-          </h2>
+            <a class="navbar-brand" href="index.html"><h1>Celestial Voyages: A Dream Come True</h1></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="space_adventure.html">Adventures</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cosmos_classroom.html">Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vr.html">VR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="travel_experience.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-lg-3">
+                    <a href="ticket.html" class="nav-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="signup.html" class="nav-btn"><i class="fas fa-user"></i> My Account</a>
+                </div>
+            </div>
         </div>
-      </nav>
+    </nav>
+
+    <section class="page-hero" style="padding:0; max-width:100%;">
+        <img src="Image/planets.jpg" alt="Planets" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Planets</h1>
+            <p>The eight major worlds of our Solar System, each with unique characteristics and mysteries.</p>
+        </div>
+    </section>
 
     <section id="educational-content">
-        <!-- Content for educational content -->
         <h1>Planets</h1>
-        <p>Our Solar System is home to a diverse array of planets, each with its own unique characteristics. Closest to the Sun is Mercury, a rocky and barren world with extreme temperature variations. Venus, often referred to as Earth's "sister planet," is shrouded in thick clouds and has a scorching hot surface, making it one of the hottest places in our Solar System.</p>
+        <p>Our Solar System is home to a diverse array of planets, each with its own unique characteristics. Closest to the Sun is Mercury, a rocky and barren world with extreme temperature variations.</p>
         <div class="content-items">
             <div class="content-item">
                 <h2>Mercury</h2>
                 <a href="sub_edu/Mercury.html">
-                    <img src="Image_SubEdu/Mercury_in_numbers.jpg" alt="Mercury">
-                    <p>The scorching hot planet closest to the Sun, where temperatures can soar to 800 degrees Fahrenheit (430 degrees Celsius) during the day.</p>
+                    <img src="Image_SubEdu/Mercury_in_numbers.jpg" alt="Mercury" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The scorching hot planet closest to the Sun, where temperatures can soar to 800 degrees Fahrenheit.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Venus</h2>
-                <a href="sub_edu/Venus.html" >
-                    <img src="Image_SubEdu/Venus_in_numbers.jpg" alt="Venus">
+                <a href="sub_edu/Venus.html">
+                    <img src="Image_SubEdu/Venus_in_numbers.jpg" alt="Venus" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
                     <p>The 'Morning Star' and Earth's scorching sister planet, hides a thick, toxic atmosphere beneath its brilliant clouds.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Earth</h2>
-                <a href="sub_edu/Earth.html" >
-                <img src="Image_SubEdu/Earth_in_numbers.jpg" alt="Earth">
-                <p>The blue jewel of our solar system, teems with life and diversity, a unique oasis in the vastness of space.</p>
+                <a href="sub_edu/Earth.html">
+                    <img src="Image_SubEdu/Earth_in_numbers.jpg" alt="Earth" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The blue jewel of our solar system, teems with life and diversity, a unique oasis in the vastness of space.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Mars</h2>
-                <a href="sub_edu/Mars.html" >
-                <img src="Image_SubEdu/Planet_Mars_in_numbers.jpg" alt="Mars">
-                <p>The 'Red Planet,' beckons as a potential future home for humanity, with its rugged terrain and hints of ancient water.</p>
+                <a href="sub_edu/Mars.html">
+                    <img src="Image_SubEdu/Planet_Mars_in_numbers.jpg" alt="Mars" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The 'Red Planet,' beckons as a potential future home for humanity, with its rugged terrain and hints of ancient water.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Jupiter</h2>
-                <a href="sub_edu/Jupiter.html" >
-                <img src="Image_SubEdu/Jupiter_in_numbers.jpg" alt="Jupiter">
-                <p>The gas giant king of the solar system, is a swirling world of mesmerizing storms and colossal beauty.</p>
+                <a href="sub_edu/Jupiter.html">
+                    <img src="Image_SubEdu/Jupiter_in_numbers.jpg" alt="Jupiter" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The gas giant king of the solar system, is a swirling world of mesmerizing storms and colossal beauty.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Saturn</h2>
-                <a href="sub_edu/Jupiter.html" >
-                <img src="Image_SubEdu/Saturn_in_numbers.jpg" alt="Saturn">
-                <p>The ringed marvel, enchants us with its stunning system of icy rings and captivating mysteries.</p>
+                <a href="sub_edu/Saturn.html">
+                    <img src="Image_SubEdu/Saturn_in_numbers.jpg" alt="Saturn" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The ringed marvel, enchants us with its stunning system of icy rings and captivating mysteries.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Uranus</h2>
-                <a href="sub_edu/Uranus.html" >
-                <img src="Image_SubEdu/Uranus_in_numbers.jpg" alt="Uranus">
-                <p>The seventh planet from the Sun, presents a chilly and mysterious world with its sideways rotation and a composition of gas and ice.</p>
+                <a href="sub_edu/Uranus.html">
+                    <img src="Image_SubEdu/Uranus_in_numbers.jpg" alt="Uranus" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The seventh planet from the Sun, presents a chilly and mysterious world with its sideways rotation.</p>
                 </a>
             </div>
             <div class="content-item">
                 <h2>Neptune</h2>
-                <a href="sub_edu/Neptune.html" >
-                <img src="Image_SubEdu/Neptune_in_numbers.jpg" alt="Neptune">
-                <p>The deep-blue ice giant, reigns as the windiest planet in the solar system, with its swirling storms and mysterious dark spot.</p>
+                <a href="sub_edu/Neptune.html">
+                    <img src="Image_SubEdu/Neptune_in_numbers.jpg" alt="Neptune" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'">
+                    <p>The deep-blue ice giant, reigns as the windiest planet in the solar system, with its swirling storms.</p>
                 </a>
             </div>
-            
-            <!-- Add more content items as needed -->
         </div>
     </section>
 
     <footer>
-        <p style="text-align: center;">&copy; 2023 Celestial Voyages. All rights reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2026 Celestial Voyages. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="space_adventure.html">Adventures</a>
+                <a href="cosmos_classroom.html">Learn</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <p>Designed & Developed by <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Jolok Banarjee</a></p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/stars.js"></script>
+    <script>
+        window.addEventListener('load', () => { setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 400); });
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+        backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
 </body>
-
 </html>

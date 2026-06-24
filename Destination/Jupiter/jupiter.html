@@ -1,239 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="icon" href="icon.png">
-    <title>Explore the Universe with Us | Premium Tourism Services</title>
-    <meta name="description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <meta name="keywords"
-        content="explore the universe, ultimate adventure, premium tourism services, discover new frontiers, unforgettable memories, Space Travel, Dhaka, travel experience, weekend getaway, month-long adventure, experienced professionals, book your ticket, wide range of travel packages, luxury cruises, backpacking adventures, plan the trip of a lifetime">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../Image/icon.png">
+    <title>Jupiter Exploration | Celestial Voyages</title>
+    <meta name="description" content="Experience the ultimate adventure with our premium space tourism services.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/slide.css">
+    <style>
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--bg-dark, #0f0f23);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-ring {
+            width: 60px; height: 60px; border: 3px solid rgba(233,69,96,0.2);
+            border-top-color: #e94560; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-    <meta property="og:title" content="Explore the Universe with Us | Premium Tourism Services">
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
+        /* ===== NAVBAR ===== */
+        .navbar { padding: 0.6rem 0 !important; transition: all 0.3s ease; }
+        .navbar.scrolled {
+            background: rgba(15,15,35,0.98) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 0.4rem 0 !important;
+        }
+        .navbar-brand h1 {
+            font-size: 1.4rem !important; font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            letter-spacing: 0.5px; margin: 0;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light, #f5f5f5); border-radius: 50px;
+            padding: 0.4rem 1.2rem; font-size: 0.85rem; font-weight: 500;
+            transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-btn:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: #fff; transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .navbar-nav { gap: 0.3rem; }
+        .navbar-nav .nav-link {
+            color: var(--text-muted, #a0a0a0) !important;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.5rem 0.9rem !important; border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--accent, #e94560) !important;
+            background: rgba(233,69,96,0.1);
+        }
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.6rem;
+        }
+        .navbar-collapse {
+            background: rgba(15,15,35,0.98);
+            padding: 1rem; border-radius: 12px; margin-top: 0.5rem;
+        }
+        .navbar-collapse:not(.show) { display: none; }
+        @media (min-width: 992px) {
+            .navbar-collapse, .navbar-collapse:not(.show), .navbar-collapse.collapse {
+                display: flex !important; flex-basis: auto;
+                background: transparent; padding: 0; margin-top: 0;
+            }
+            .navbar-nav { flex-direction: row; }
+            .navbar-toggler { display: none !important; }
+        }
 
-    <meta name="robots" content="noindex,nofollow" />
-    <meta http-equiv="content-language" content="en" />
+        /* ===== HERO BANNER ===== */
+        .page-hero {
+            position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 500px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .page-hero img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; filter: brightness(0.4);
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(15,15,35,0.3) 0%, rgba(15,15,35,0.8) 100%);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 0 1rem;
+        }
+        .page-hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .page-hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.8);
+            max-width: 600px; margin: 0 auto;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 3rem; margin-top: 1.5rem;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 1.8rem; font-weight: 800; color: var(--accent, #e94560); }
+        .hero-stat .label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
 
-    <!-- <link rel="stylesheet" href="/css/slide.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/contact.css"> -->
+        /* ===== CONTENT SECTIONS ===== */
+        .content-section {
+            max-width: 1000px; margin: 0 auto; padding: 3rem 1rem;
+        }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-header h2 {
+            font-size: 1.8rem; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-header p { color: var(--text-muted, #a0a0a0); max-width: 600px; margin: 0 auto; }
+        .section-divider {
+            width: 60px; height: 4px; border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent, #e94560), transparent);
+            margin: 0 auto 1.5rem;
+        }
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="slide.css">
+        /* ===== CARDS ===== */
+        .info-card {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden;
+        }
+        .info-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--accent, #e94560), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .info-card:hover::before { opacity: 1; }
+        .info-card:hover {
+            border-color: var(--border-glow, rgba(233,69,96,0.4));
+            box-shadow: 0 0 30px var(--accent-glow, rgba(233,69,96,0.3));
+            transform: translateY(-5px);
+        }
+        .info-card h3 {
+            font-size: 1.3rem; color: var(--accent, #e94560);
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+        }
+        .info-card h3 i { font-size: 1.1rem; }
+        .info-card ul { list-style: none; padding: 0; margin: 0; }
+        .info-card ul li {
+            padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted, #a0a0a0); font-size: 0.95rem;
+            display: flex; align-items: flex-start; gap: 0.6rem;
+        }
+        .info-card ul li:last-child { border-bottom: none; }
+        .info-card ul li i {
+            color: var(--accent, #e94560); font-size: 0.85rem;
+            margin-top: 0.2rem; width: 20px; text-align: center;
+        }
+        .info-card ul li strong { color: var(--text-light, #f5f5f5); font-weight: 600; }
+
+        /* Inclusion / Exclusion specific */
+        .inclusion-card ul li::before {
+            content: "\2713"; font-family: "Font Awesome 6 Free";
+            color: #42b983; font-weight: 900; margin-right: 0.5rem;
+        }
+        .exclusion-card ul li::before {
+            content: "\2717"; font-family: "Font Awesome 6 Free";
+            color: #e94560; font-weight: 900; margin-right: 0.5rem;
+        }
+
+        /* ===== ITINERARY TIMELINE ===== */
+        .timeline {
+            position: relative; padding-left: 2rem;
+        }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(180deg, var(--accent, #e94560), transparent);
+        }
+        .timeline-item {
+            position: relative; padding-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -2.35rem; top: 0.3rem;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--accent, #e94560);
+            box-shadow: 0 0 10px rgba(233,69,96,0.5);
+        }
+        .timeline-item strong {
+            color: var(--accent, #e94560); font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .timeline-item p {
+            color: var(--text-muted, #a0a0a0); font-size: 0.95rem;
+            margin: 0.3rem 0 0; line-height: 1.6;
+        }
+
+        /* ===== RESERVE CTA ===== */
+        .reserve-cta {
+            max-width: 800px; margin: 3rem auto;
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 3rem 2rem;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .reserve-cta::after {
+            content: ''; position: absolute; top: -50%; right: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(233,69,96,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .reserve-cta h2 {
+            font-size: 1.8rem; margin-bottom: 0.5rem; position: relative; z-index: 1;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .reserve-cta p {
+            color: var(--text-muted, #a0a0a0); font-size: 1.05rem;
+            margin-bottom: 1.5rem; position: relative; z-index: 1;
+        }
+        .btn-reserve {
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; border-radius: 50px; padding: 1rem 2.5rem;
+            color: white; font-weight: 600; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s ease;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+            position: relative; z-index: 1;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .btn-reserve:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(233,69,96,0.5);
+            color: white;
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ===== FOOTER ===== */
+        footer { padding: 3rem 1rem; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted, #a0a0a0); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent, #e94560); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted, #a0a0a0); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: all 0.3s ease; text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: white; transform: translateY(-2px);
+        }
+        .developer-credit {
+            text-align: center; margin-top: 1.5rem;
+            padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .developer-credit p { color: var(--text-muted, #a0a0a0); font-size: 0.9rem; margin: 0; }
+        .developer-credit a {
+            color: var(--accent, #e94560); text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+        }
+        .developer-credit a:hover { color: #fff; text-shadow: 0 0 10px rgba(233,69,96,0.5); }
+        .developer-credit i { margin-right: 0.3rem; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; color: white; font-size: 1.1rem;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease; z-index: 999;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.4);
+            display: flex; align-items: center; justify-content: center;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+
+        @media (max-width: 768px) {
+            .hero-stats { gap: 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .timeline { padding-left: 1.5rem; }
+            .timeline-item::before { left: -1.85rem; }
+        }
+    </style>
 </head>
-
 <body>
-    <nav class="navbar background">
-        <div class="leftNav">
-            <h1>Celestial Voyages</h1>
+    <!-- Preloader -->
+    <div id="preloader"><div class="loader-ring"></div></div>
+
+    <canvas id="stars" class="stars"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html"><h1>Celestial Voyages: A Dream Come True</h1></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../../space_adventure.html">Adventures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../cosmos_classroom.html">Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../vr.html">VR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../travel_experience.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-lg-3">
+                    <a href="../../ticket.html" class="nav-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="../../signup.html" class="nav-btn"><i class="fas fa-user"></i> My Account</a>
+                </div>
+            </div>
         </div>
-        <!-- <div class="user-section rightNav">
-            <button class="btn"><a href="signup.html">Log In</a></button>
-            <button class="btn"><a href="signup.html">Sign Up</a></button>
-        </div> -->
     </nav>
 
-    <!-- <section  class="slider">
-        <div class="image-slideshow">
-            <div class="image fade">
-            <img src="1.jpg" width="auto" height="600" alt="Image">
-            </div>        
-            <div class="image fade">
-            <img src="2.jpg" width="auto" height="600" alt="Image">
-            </div>        
-            <div class="image fade">
-            <img src="3.jpg" width="auto" height="600" alt="Image">
+    <!-- Hero Banner -->
+    <section class="page-hero" style="padding:0; max-width:100%;">
+        <img src="1.jpg" alt="Jupiter">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Jupiter Exploration</h1>
+            <p>Journey to the largest planet in our solar system and witness the majestic gas giant up close.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="num">9</div><div class="label">Months</div></div>
+                <div class="hero-stat"><div class="num">$4.2M</div><div class="label">Per Person</div></div>
+                <div class="hero-stat"><div class="num">4</div><div class="label">Major Moons</div></div>
             </div>
-          </div>
-          <script src="main.js"></script>
-    </section> -->
-
-
-    <section class="overview">
-        <h2>SJupiter Exploration Adventure</h2><br />
-        <p>Journey to the largest planet in our solar system and witness the majestic gas giant up close. Experience the awe-inspiring beauty of the swirling gas clouds, the tantalizing mystery of the Great Red Spot, and the mesmerizing dance of its numerous moons. While landing on Jupiter is impossible due to its lack of a solid surface and immense gravity, this tour offers a unique space-cruise experience around the planet and its moons.</p>
-        <!-- Add more overview content here -->
-    </section>
-
-    <section class="location">
-        <h2>Location</h2>
-        <ul>
-            <li><strong>Tour Provider:</strong> Celestial Voyages Inc.</li>
-            <li><strong>Contact:</strong> +990287686748 | tours@celestialvoyages.com</li>
-            <li><strong>Date and time:</strong> September 3, 2042, 4:25 PM PDT</li>
-            <li><strong>Location:</strong> Departure from Spaceport America, New Mexico, USA.</li>
-        </ul>
-        <h3>Itinerary:</h3>
-        
-        <ul>
-            <li>Duration: 9 months</li>
-            <ul>
-                <li>Month 1: Departure from Earth and settling into the interplanetary cruiser.</li>
-                <li>Month 2-3: Journey through the asteroid belt.</li>
-                <li>Month 4: Arrival in Jupiter's orbit and sightseeing of the gas giant.</li>
-                <li>Month 5-6: Exploration of Jupiter's major moons: Ganymede, Callisto, Io, an</li>d Europa.
-                <li>Month 7: Gathering data and observing Jupiter's storms.</li>
-                <li>Month 8: Preparing for the journey back to Earth.</li>
-                <li>Month 9: Arrival on Earth.</li>
-                
-            </ul>
-        </ul>
-    </section>
-
-    <section class="inclusing-Exclusion">
-        <h2>Inclusion & Exclusion</h2>
-        <div class="inclusion">
-            <h2>Inclusions:</h2>
-            <ul>
-                <li>Transportation to and from Mars.</li>
-                <li>Hotel/resort accommodation on Mars.</li>
-                <li>Arrival assistance at the Mars space station by representative.</li>
-                <li>Full Board Meal Plan - (Daily breakfast, lunch, and dinner).</li>
-                <li>Food and water for the duration of the trip.</li>
-                <li>Medical care.</li>
-                <li>Life support systems.</li>
-                <li>Training for the journey.</li>
-                <li>Insurance.</li>z
-                <li>Video and camera permit at locations.</li>
-            </ul>
-        </div>
-        <div class="exclusion">
-            <h2>Exclusions:</h2>
-            <ul>
-                <li>Any meals other than those mentioned in the package.</li>
-                <li>Expenses caused by factors beyond our control like rail and flight delays, and vehicle malfunctions
-                    etc.</li>
-                <li>Any services not specifically mentioned in the inclusions.</li>
-                <li>Personal belongings.</li>
-                <li>Pets.</li>
-                <li>Hazardous materials.</li>
-                <li>Weapons.</li>
-                <li>Alcohol and drugs.</li>
-                <li>Any other items that could be a safety hazard or a nuisance.</li>
-            </ul>
         </div>
     </section>
 
-    <section class="container">
-        <h2>Mars Tourism Requirements</h2><br />
-        <section class="additional-info">
-            <h3>Mars Entry Requirements:</h3>
-            <ul>
-                <li>Must be in good physical and mental health. The journey to Mars is long and challenging, and
-                    tourists must be able to withstand the rigors of space travel.</li>
-                <li>Must have a valid passport and visa. Tourists will need to obtain a visa from the Martian government
-                    before they can travel to Mars.</li>
-                <li>Must have a high level of education. Tourists will need to have a good understanding of science and
-                    engineering in order to survive on Mars.</li>
-                <li>Must be able to speak English. English is the lingua franca of space travel, so tourists will need
-                    to be able to communicate with the crew and other tourists.</li>
-                <li>Must be willing to undergo rigorous training. Tourists will need to undergo extensive training in
-                    order to prepare for the journey to Mars. This training will cover topics such as space travel,
-                    survival skills, and Martian geology.</li>
-                <li>Must be able to pay the high cost of travel to Mars. The cost of travel to Mars is still very high,
-                    so tourists will need to be wealthy enough to afford it.</li>
-                <li>These are just some of the imaginary Mars entry requirements for tourists. The actual requirements
-                    may vary depending on the specific company or organization that is offering Mars tourism packages.
-                </li>
-            </ul>
-
-
-            <h3>Additional Considerations:</h3>
-            <ul>
-                <li>The age of the tourist. Younger tourists may be more adaptable to the harsh Martian environment, but
-                    they may also be more prone to risk-taking.</li>
-                <li>The tourist's experience with space travel. Tourists who have previous experience with space travel
-                    may be better prepared for the journey to Mars.</li>
-                <li>The tourist's physical and mental health. Tourists who have any underlying health conditions may be
-                    at a higher risk of complications during the journey to Mars.</li>
-                <li>The tourist's financial resources. The cost of travel to Mars is still very high, so tourists will
-                    need to be wealthy enough to afford it.</li>
-            </ul>
-
-            <p><strong>Note:</strong> Ultimately, the decision of whether or not to allow tourists to travel to Mars
-                will be up to the Martian government. The government will need to weigh the risks and benefits of
-                tourism before making a decision.</p>
-        </section>
-
-        <section class="requirements">
-            <h2>Requirements:</h2><br />
-            <p>These things must be carried for traveling to Mars:</p>
-            <ul>
-                <li>Passport</li>
-                <li>Identification Card (with Verification from Concerned Government Authority & Our Agency).</li>
-                <li>The travelers must be present at our launching facility at least 14 days before the arrival date for
-                    observation.</li>
-            </ul>
-            </ul>
-        </section>
-    </section>
-    \
-    <section class="travel-tips">
-        <h2>Travel Tips</h2><br />
-        <p>Be prepared for the harsh environment:</p>
-        <ul>
-            <li><u>Be prepared for the harsh environment.</u> Mars is a cold, dry, and dusty place with a thin
-                atmosphere. The average temperature on Mars is -63 degrees Celsius, and the atmosphere is only about
-                0.03% as dense as Earth's atmosphere. This means that there is no oxygen to breathe, and the radiation
-                levels are much higher than on Earth.</li>
-            <li><u>Wear protective clothing.</u> You will need to wear protective clothing to protect yourself from the
-                harsh Martian environment. This includes a spacesuit, helmet, gloves, and boots.</li>
-            <li><u> careful where you step.</u> The Martian surface is covered in rocks and dust, and there are many
-                hazards, such as crevasses and sinkholes.</li>
-            <li><u>Stay in contact with your crew.</u> It is important to stay in contact with your crew at all times.
-                This is especially important in case of an emergency.</li>
-            <li><u> patient and respectful.</u> Mars is a new and exciting place, but it is also a fragile environment.
-                It is important to be patient and respectful of the Martian environment.</li>
-        </ul>
-    </section>
-
-    <section class="additional-tips">
-        <h2>Additional Tips</h2>
-        <ul>
-            <li><u>Get plenty of rest.</u> The journey to Mars is long and tiring, so it is important to get plenty of
-                rest before and after your trip.</li>
-            <li><u>Stay hydrated.</u> The Martian atmosphere is very dry, so it is important to stay hydrated. Drink
-                plenty of water and avoid alcohol and caffeine.</li>
-            <li><u>Exercise regularly.</u> The journey to Mars is sedentary, so it is important to exercise regularly to
-                stay in shape.</li>
-            <li><u>Take care of your mental health.</u> The journey to Mars can be stressful, so it is important to take
-                care of your mental health. Talk to a therapist or counselor if you are feeling stressed or anxious.
-            </li>
-        </ul>
-        <p>Following these tips will help you to have a safe and enjoyable Mars tourism experience.</p>
-    </section>
-
-    <section class="policy">
-        <h2>Policy</h2>
-        <section class="cancellation-policy">
-            <h2>Cancellation</h2><br />
-            <p>To cancel any tour, an email has to be sent to tours@voyegar.com mentioning the tour booking ID and
-                details about the cancellation.</p>
-            <p>The time of sending the email will be considered as the time of cancellation.</p>
-            <p>The email will be considered as the final application for cancellation. A phone call to the voyegar
-                hotline number or any other team member of voyegar will not be considered as a request for cancellation.
+    <!-- Overview -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Overview</h2>
+            <div class="section-divider"></div>
+            <p>Experience the awe-inspiring beauty of swirling gas clouds, the mystery of the Great Red Spot, and the mesmerizing dance of Jupiter's numerous moons.</p>
+        </div>
+        <div class="info-card reveal reveal-delay-1">
+            <h3><i class="fas fa-info-circle"></i> About This Journey</h3>
+            <p style="color: var(--text-muted, #a0a0a0); line-height: 1.7;">
+                While landing on Jupiter is impossible due to its lack of a solid surface and immense gravity, this tour offers a unique space-cruise experience around the planet and its moons. Witness the grandeur of the gas giant from orbit and explore its fascinating satellite system.
             </p>
-        </section>
-        <section class="refund-policy">
-            <h2>Refund</h2><br />
-            <p>The full amount of the tour fee will be refunded if the booking is canceled forty five (45) days prior to
-                the start of the experience/tour.</p>
-            <p>No refund will be provided if the booking is canceled less than forty five (45) days prior to the start
-                of the experience/tour.</p>
-            <p>All refund (if applicable) will be processed within thirty (30) working days.</p>
-        </section>
+        </div>
     </section>
 
+    <!-- Location & Itinerary -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Location & Itinerary</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Tour Details</h3>
+                    <ul>
+                        <li><i class="fas fa-building"></i><strong>Provider:</strong> Celestial Voyages Inc.</li>
+                        <li><i class="fas fa-phone"></i><strong>Contact:</strong> +990287686748</li>
+                        <li><i class="fas fa-envelope"></i><strong>Email:</strong> tours@celestialvoyages.com</li>
+                        <li><i class="fas fa-calendar-alt"></i><strong>Date:</strong> September 3, 2042, 4:25 PM PDT</li>
+                        <li><i class="fas fa-rocket"></i><strong>Departure:</strong> Spaceport America, New Mexico, USA</li>
+                        <li><i class="fas fa-clock"></i><strong>Duration:</strong> 9 Months</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card">
+                    <h3><i class="fas fa-route"></i> Itinerary</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <strong>Month 1</strong>
+                            <p>Departure from Earth and settling into the interplanetary cruiser.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Month 2-3</strong>
+                            <p>Journey through the asteroid belt.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Month 4</strong>
+                            <p>Arrival in Jupiter's orbit and sightseeing of the gas giant.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Month 5-6</strong>
+                            <p>Exploration of Jupiter's major moons: Ganymede, Callisto, Io, and Europa.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Month 7</strong>
+                            <p>Gathering data and observing Jupiter's storms.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Month 8</strong>
+                            <p>Preparing for the journey back to Earth.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Month 9</strong>
+                            <p>Arrival on Earth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inclusions & Exclusions -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Inclusions & Exclusions</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card inclusion-card">
+                    <h3><i class="fas fa-check-circle"></i> Inclusions</h3>
+                    <ul>
+                        <li>Transportation to and from Jupiter orbit</li>
+                        <li>Space cruiser accommodation</li>
+                        <li>Arrival assistance at the space station</li>
+                        <li>Full Board Meal Plan (Daily breakfast, lunch, and dinner)</li>
+                        <li>Food and water for the duration of the trip</li>
+                        <li>Medical care and life support systems</li>
+                        <li>Training for the journey</li>
+                        <li>Comprehensive insurance</li>
+                        <li>Video and camera permit at locations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card exclusion-card">
+                    <h3><i class="fas fa-times-circle"></i> Exclusions</h3>
+                    <ul>
+                        <li>Any meals other than those mentioned in the package</li>
+                        <li>Expenses caused by factors beyond our control</li>
+                        <li>Any services not specifically mentioned in the inclusions</li>
+                        <li>Personal belongings and pets</li>
+                        <li>Hazardous materials and weapons</li>
+                        <li>Alcohol and drugs</li>
+                        <li>Any other items that could be a safety hazard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Travel Requirements</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="info-card reveal reveal-delay-1">
+            <h3><i class="fas fa-clipboard-check"></i> Entry Requirements</h3>
+            <ul>
+                <li><i class="fas fa-heartbeat"></i>Must be in good physical and mental health to withstand the rigors of space travel</li>
+                <li><i class="fas fa-passport"></i>Valid passport and space travel visa required</li>
+                <li><i class="fas fa-graduation-cap"></i>High level of education in science and engineering recommended</li>
+                <li><i class="fas fa-language"></i>Must be able to communicate in English</li>
+                <li><i class="fas fa-dumbbell"></i>Willing to undergo rigorous pre-flight training</li>
+                <li><i class="fas fa-credit-card"></i>Must be able to pay the high cost of interplanetary travel</li>
+            </ul>
+        </div>
+        <div class="info-card reveal reveal-delay-2">
+            <h3><i class="fas fa-suitcase"></i> What to Bring</h3>
+            <ul>
+                <li><i class="fas fa-id-card"></i>Passport and Identification Card</li>
+                <li><i class="fas fa-id-badge"></i>Verification from Concerned Government Authority & Our Agency</li>
+                <li><i class="fas fa-calendar-check"></i>Arrive at launching facility at least 14 days before departure for observation</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Travel Tips -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Travel Tips</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card">
+                    <h3><i class="fas fa-shield-alt"></i> Safety Tips</h3>
+                    <ul>
+                        <li><i class="fas fa-temperature-low"></i>Be prepared for extreme cold and radiation in deep space</li>
+                        <li><i class="fas fa-user-astronaut"></i>Wear protective clothing and spacesuits at all times outside the cruiser</li>
+                        <li><i class="fas fa-exclamation-triangle"></i>Be careful where you step on moon surfaces</li>
+                        <li><i class="fas fa-headset"></i>Stay in contact with your crew at all times</li>
+                        <li><i class="fas fa-hand-holding-heart"></i>Be patient and respectful of the space environment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card">
+                    <h3><i class="fas fa-lightbulb"></i> Additional Tips</h3>
+                    <ul>
+                        <li><i class="fas fa-bed"></i>Get plenty of rest before and after your trip</li>
+                        <li><i class="fas fa-tint"></i>Stay hydrated — space environments are very dry</li>
+                        <li><i class="fas fa-running"></i>Exercise regularly to maintain muscle mass in zero-G</li>
+                        <li><i class="fas fa-brain"></i>Take care of your mental health during the long journey</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Policies</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card">
+                    <h3><i class="fas fa-ban"></i> Cancellation Policy</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i>Send cancellation email to tours@voyegar.com with booking ID</li>
+                        <li><i class="fas fa-clock"></i>Email timestamp will be considered as cancellation time</li>
+                        <li><i class="fas fa-phone-slash"></i>Phone calls will not be considered as cancellation requests</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card">
+                    <h3><i class="fas fa-undo"></i> Refund Policy</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Full refund if cancelled 45+ days before departure</li>
+                        <li><i class="fas fa-times"></i>No refund if cancelled less than 45 days before departure</li>
+                        <li><i class="fas fa-hourglass-half"></i>All refunds processed within 30 working days</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reserve CTA -->
+    <section class="reserve-cta reveal">
+        <h2>Ready for the Journey of a Lifetime?</h2>
+        <p>Secure your spot on the Jupiter Exploration Adventure. Limited seats available for the 2042 departure.</p>
+        <a href="../../ticket.html" class="btn-reserve"><i class="fas fa-ticket-alt"></i> Reserve Your Spot</a>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p style="text-align: center;">&copy; 2023 Celestial Voyages. All rights reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2026 Celestial Voyages. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../space_adventure.html">Adventures</a>
+                <a href="../../cosmos_classroom.html">Learn</a>
+                <a href="../../index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <p>Designed & Developed by <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Jolok Banarjee</a></p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <!-- Back to Top -->
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/stars.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 400);
+        });
+
+        // Navbar scroll effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll Reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
 </html>

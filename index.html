@@ -1,150 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Image/icon.png">
-    <title>Explore the Universe with Us | Premium Tourism Services</title>
-    <meta name="description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <meta name="keywords"
-        content="explore the universe, ultimate adventure, premium tourism services, discover new frontiers, unforgettable memories, Space Travel, Dhaka, travel experience, weekend getaway, month-long adventure, experienced professionals, book your ticket, wide range of travel packages, luxury cruises, backpacking adventures, plan the trip of a lifetime">
-
-    <meta property="og:title" content="Explore the Universe with Us | Premium Tourism Services">
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-
-    <meta http-equiv="content-language" content="en" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/styles.css" />
+    <title>Explore the Universe with Us | Celestial Voyages</title>
+    <meta name="description" content="Experience the ultimate adventure with our premium space tourism services.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/slide.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="css/about.css">
+    <style>
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--bg-dark, #0f0f23);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-ring {
+            width: 60px; height: 60px; border: 3px solid rgba(233,69,96,0.2);
+            border-top-color: #e94560; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* ===== HERO CAROUSEL IMPROVEMENTS ===== */
+        .hero-carousel { position: relative; width: 100%; }
+        .hero-carousel .carousel-item { height: 100vh; min-height: 500px; max-height: 800px; }
+        .hero-carousel .carousel-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.55);
+            transition: transform 6s ease;
+        }
+        .hero-carousel .carousel-item.active img { transform: scale(1.05); }
+        .carousel-caption {
+            position: absolute; bottom: 20%; left: 0; right: 0;
+            text-align: center; z-index: 10; padding: 0 1rem;
+            background: none !important;
+        }
+        .carousel-caption h2 {
+            font-size: clamp(2rem, 5vw, 4rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            text-shadow: none; margin-bottom: 0.5rem;
+            opacity: 0; transform: translateY(30px);
+            animation: captionIn 0.8s ease forwards 0.3s;
+        }
+        .carousel-caption p {
+            font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.85);
+            max-width: 600px; margin: 0 auto 1.5rem;
+            opacity: 0; transform: translateY(20px);
+            animation: captionIn 0.8s ease forwards 0.6s;
+        }
+        .carousel-caption .btn-hero {
+            opacity: 0; transform: translateY(20px);
+            animation: captionIn 0.8s ease forwards 0.9s;
+        }
+        @keyframes captionIn { to { opacity: 1; transform: translateY(0); } }
+        .carousel-indicators button {
+            width: 12px !important; height: 12px !important; border-radius: 50% !important;
+            background-color: rgba(255,255,255,0.4) !important; border: 2px solid transparent !important;
+            transition: all 0.3s ease;
+        }
+        .carousel-indicators button.active {
+            background-color: var(--accent, #e94560) !important;
+            border-color: #fff !important; transform: scale(1.2);
+        }
+        .carousel-control-prev, .carousel-control-next {
+            width: 50px; height: 50px; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+            opacity: 0; transition: opacity 0.3s ease, background 0.3s ease;
+        }
+        .hero-carousel:hover .carousel-control-prev,
+        .hero-carousel:hover .carousel-control-next { opacity: 1; }
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            background: rgba(233,69,96,0.3);
+        }
+        .scroll-indicator {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            color: rgba(255,255,255,0.7); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+            animation: bounce 2s infinite; z-index: 10;
+        }
+        .scroll-indicator i { font-size: 1.2rem; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+
+        /* ===== NAVBAR IMPROVEMENTS ===== */
+        .navbar { padding: 0.6rem 0 !important; transition: all 0.3s ease; }
+        .navbar.scrolled {
+            background: rgba(15,15,35,0.98) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 0.4rem 0 !important;
+        }
+        .navbar-brand h1 {
+            font-size: 1.4rem !important; font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            letter-spacing: 0.5px; margin: 0;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light, #f5f5f5); border-radius: 50px;
+            padding: 0.4rem 1.2rem; font-size: 0.85rem; font-weight: 500;
+            transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-btn:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: #fff; transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+
+        /* ===== SCROLL REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== OVERVIEW CARDS IMPROVEMENTS ===== */
+        .overview { padding: 5rem 1rem; }
+        .sub-section {
+            position: relative; overflow: hidden;
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 2rem 1.5rem;
+            text-align: center; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sub-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent, #e94560), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .sub-section:hover::before { opacity: 1; }
+        .sub-section:hover {
+            border-color: var(--border-glow, rgba(233,69,96,0.4));
+            box-shadow: 0 0 40px var(--accent-glow, rgba(233,69,96,0.3));
+            transform: translateY(-8px);
+        }
+        .sub-section .card-icon {
+            font-size: 2.5rem; color: var(--accent, #e94560);
+            margin-bottom: 1rem; display: inline-block;
+            transition: transform 0.4s ease;
+        }
+        .sub-section:hover .card-icon { transform: scale(1.1) rotate(-5deg); }
+        .sub-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .sub-section p { color: var(--text-muted, #a0a0a0); font-size: 0.95rem; margin-bottom: 1.2rem; }
+        .image-container { border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; position: relative; }
+        .image-container img { transition: transform 0.6s ease; }
+        .sub-section:hover .image-container img { transform: scale(1.08); }
+        .overlay-link {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.4s ease;
+        }
+        .image-container:hover .overlay-link { opacity: 1; }
+        .explore-button {
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; border-radius: 50px; padding: 0.7rem 2rem;
+            color: white; font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .explore-button:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+
+        /* ===== CUSTOMIZE SECTION ===== */
+        .customize { padding: 5rem 1rem; }
+        .customize_Itenerary {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 2.5rem;
+            position: relative; overflow: hidden;
+        }
+        .customize_Itenerary::after {
+            content: ''; position: absolute; top: -50%; right: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(233,69,96,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .radio-btn { display: flex; gap: 2rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap; }
+        .radio-btn label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-light, #f5f5f5); font-size: 0.95rem; transition: color 0.3s ease; }
+        .radio-btn label:hover { color: var(--accent, #e94560); }
+        .radio-btn input[type="radio"] { accent-color: var(--accent, #e94560); width: 18px; height: 18px; cursor: pointer; }
+
+        /* ===== ABOUT US IMPROVEMENTS ===== */
+        #about-us { padding: 5rem 1rem; }
+        .about-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem; margin-top: 2rem;
+        }
+        .about-card {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 2rem;
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+        .about-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--accent, #e94560), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .about-card:hover::before { opacity: 1; }
+        .about-card:hover {
+            border-color: var(--border-glow, rgba(233,69,96,0.4));
+            box-shadow: 0 0 30px var(--accent-glow, rgba(233,69,96,0.3));
+            transform: translateY(-5px);
+        }
+        .about-card h2 { font-size: 1.3rem; color: var(--accent, #e94560); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+        .about-card h2 i { font-size: 1.1rem; }
+        .about-card p { color: var(--text-muted, #a0a0a0); font-size: 0.95rem; line-height: 1.7; }
+        .about-card strong { color: var(--accent, #e94560); }
+
+        /* ===== CONTACT SECTION COMBINED ===== */
+        .contact-wrapper {
+            max-width: 1000px; margin: 0 auto; padding: 5rem 1rem;
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: start;
+        }
+        @media (max-width: 768px) { .contact-wrapper { grid-template-columns: 1fr; } }
+        .contact-form { max-width: 100%; margin: 0; padding: 0; }
+        .contact-form h1 { text-align: left; font-size: 2rem; }
+        .contact-form h2 { text-align: left; }
+        .contact-info-side {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 2rem;
+            height: fit-content; position: sticky; top: 100px;
+        }
+        .contact-info-side h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--text-light, #f5f5f5); }
+        .contact-info-item {
+            display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem;
+        }
+        .contact-info-item i {
+            width: 40px; height: 40px; border-radius: 12px;
+            background: rgba(233,69,96,0.1); color: var(--accent, #e94560);
+            display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+        }
+        .contact-info-item div strong { color: var(--accent, #e94560); font-size: 0.9rem; }
+        .contact-info-item div p { color: var(--text-muted, #a0a0a0); font-size: 0.9rem; margin: 0; }
+
+        /* ===== EMBARK CTA IMPROVEMENTS ===== */
+        .embark { max-width: 900px; margin: 4rem auto; padding: 4rem 2rem; }
+        .embark h1 { font-size: clamp(2rem, 4vw, 3rem); }
+        .embark .lead-text {
+            color: var(--text-muted, #a0a0a0); font-size: 1.1rem; line-height: 1.8;
+            max-width: 600px; margin: 0 auto 2rem;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; color: white; font-size: 1.1rem;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease; z-index: 999;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.4);
+            display: flex; align-items: center; justify-content: center;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+
+        /* ===== SECTION DIVIDERS ===== */
+        .section-divider {
+            width: 60px; height: 4px; border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent, #e94560), transparent);
+            margin: 0 auto 2rem;
+        }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h1 { margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-muted, #a0a0a0); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+
+        /* ===== FOOTER IMPROVEMENTS ===== */
+        footer { padding: 3rem 1rem; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted, #a0a0a0); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent, #e94560); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted, #a0a0a0); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: all 0.3s ease; text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: white; transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-carousel .carousel-item { height: 60vh; min-height: 400px; }
+            .carousel-caption { bottom: 15%; }
+            .carousel-control-prev, .carousel-control-next { opacity: 1; width: 40px; height: 40px; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .contact-info-side { position: static; }
+        }
+        /* ===== FULL NAVIGATION BAR ===== */
+        .navbar-nav { gap: 0.3rem; }
+        .navbar-nav .nav-link {
+            color: var(--text-muted, #a0a0a0) !important;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.5rem 0.9rem !important; border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--accent, #e94560) !important;
+            background: rgba(233,69,96,0.1);
+        }
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.6rem;
+        }
+        .navbar-toggler:focus { box-shadow: 0 0 0 3px rgba(233,69,96,0.3); }
+        /* Mobile: collapsed menu styling */
+        .navbar-collapse {
+            background: rgba(15,15,35,0.98);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+        .navbar-collapse:not(.show) {
+            display: none;
+        }
+        /* Desktop: always show nav items */
+        @media (min-width: 992px) {
+            .navbar-collapse,
+            .navbar-collapse:not(.show),
+            .navbar-collapse.collapse {
+                display: flex !important;
+                flex-basis: auto;
+                background: transparent;
+                padding: 0;
+                margin-top: 0;
+            }
+            .navbar-nav { flex-direction: row; }
+            .navbar-toggler { display: none !important; }
+        }
+
+        /* ===== DEVELOPER CREDIT ===== */
+        .developer-credit {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .developer-credit p {
+            color: var(--text-muted, #a0a0a0);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .developer-credit a {
+            color: var(--accent, #e94560);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .developer-credit a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(233,69,96,0.5);
+        }
+        .developer-credit i { margin-right: 0.3rem; }
+    </style>
 </head>
-
 <body>
-    <!-- <nav class="navbar background" style="background-color: #1C4E80;">
-        <div class="logo" style="width:58px;"><img src="Image/icon.png" alt="logo"></div>
-        <div class="leftNav">
-            <h1 style="color: white; font-size: xx-large; align-self: flex-start;">Celestial Voyages: A Dream Come True</h1>
-        </div>
-         <div class="user-section rightNav">
-            <button class="btn"><a href="signup.html">Log In</a></button>
-            <button class="btn"><a href="signup.html">Sign Up</a></button>
-        </div> 
-    </nav> -->
+    <!-- Preloader -->
+    <div id="preloader"><div class="loader-ring"></div></div>
 
-    <nav class="navbar navbar-dark bg-dark py-1">
+    <canvas id="stars" class="stars"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1" id="mainNav">
         <div class="container-fluid">
-          <a class="navbar-brand"><h1 style="color: white; font-size: xx-large; align-self: flex-start;">Celestial Voyages: A Dream Come True</h1></a>
-          <h2 class="d-flex"  style="color: white; font-size: large;">
-            My account
-          </h2>
-        </div>
-      </nav>
-
-
-    
-        <!-- <div class="image-slideshow">
-            <div class="image fade">
-                <img src="Image/1.png" width="auto" height="520" alt="Image">
-            </div>
-            <div class="image fade">
-                <img src="Image/2.png" width="auto" height="520" alt="Image">
-            </div>
-            <div class="image fade">
-                <img src="Image/3.png" width="auto" height="520" alt="Image">
-            </div>
-            <div class="image fade">
-                <img src="Image/4.png" width="auto" height="520" alt="Image">
-            </div>
-            <div class="image fade">
-                <img src="Image/5.png" width="auto" height="520" alt="Image">
+            <a class="navbar-brand" href="index.html"><h1>Celestial Voyages: A Dream Come True</h1></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="space_adventure.html"> Adventures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cosmos_classroom.html"> Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vr.html">VR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="travel_experience.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact"> Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-lg-3">
+                    <a href="ticket.html" class="nav-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="signup.html" class="nav-btn"><i class="fas fa-user"></i> My Account</a>
+                </div>
             </div>
         </div>
-        <script src="Js/main.js"></script> -->
-        <section>
+    </nav>
+
+    <!-- Hero Carousel -->
+    <section class="hero-carousel" style="padding:0; max-width:100%;">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="1000">
-                <img src="Image/1.png" class="d-block w-100" width="auto" height="520" jalt="...">
-                
-              </div>
-              <div class="carousel-item" data-bs-interval="1000">
-                <img src="Image/2.png" class="d-block w-100 " width="auto" height="520" alt="...">
-                
-              </div>
-              <div class="carousel-item" >
-                <img src="Image/3.png" class="d-block w-100" width="auto" height="520" alt="...">
-                
-              </div>
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="Image/1.png" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" class="d-block w-100" alt="Space Travel">
+                    <div class="carousel-caption">
+                        <h2>Journey Beyond Earth</h2>
+                        <p>Experience the wonders of the cosmos with our premium space tourism services.</p>
+                        <a href="space_adventure.html" class="btn btn-primary btn-lg btn-hero">Start Your Adventure</a>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="Image/2.png" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" class="d-block w-100" alt="Cosmos">
+                    <div class="carousel-caption">
+                        <h2>Explore the Unknown</h2>
+                        <p>From Mars to Saturn, discover worlds that have captivated humanity for millennia.</p>
+                        <a href="cosmos_classroom.html" class="btn btn-primary btn-lg btn-hero">Learn More</a>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="Image/3.png" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" class="d-block w-100" alt="Adventure">
+                    <div class="carousel-caption">
+                        <h2>Your Dream, Our Mission</h2>
+                        <p>Craft your perfect interplanetary itinerary with our expert space travel agents.</p>
+                        <a href="ticket.html" class="btn btn-primary btn-lg btn-hero">Book Now</a>
+                    </div>
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
-          </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span><i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
 
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        </section>
-
+    <!-- Overview -->
     <section class="overview">
-        <h1>Overview</h1>
-        <p>Welcome to the future of space tourism! We're here to help you explore the wonders of our solar system like
-            never before by creating a unique and unforgettable experience. Whether it's Mars, Jupiter, or Saturn, our
-            team of expert space travel agents will craft the perfect adventure just for you. Additionally, you can
-            experience space through virtual reality, and we will nurture your enthusiasm for space and broaden your
-            knowledge of space. Dive into the mysteries of outer space and witness the marvels of the cosmos up close.
-        </p>
+        <div class="section-header reveal">
+            <h1>Overview</h1>
+            <div class="section-divider"></div>
+            <p>Welcome to the future of space tourism! We craft unique and unforgettable experiences across our solar system.</p>
+        </div>
         <section class="overview2">
-            <div class="sub-section">
-                <h2>Itenerary</h2>
-                <p>Discover the mysteries of the universe.</p>
+            <div class="sub-section reveal reveal-delay-1">
+                <i class="fas fa-route card-icon"></i>
+                <h2>Itinerary</h2>
+                <p>Discover the mysteries of the universe with curated space routes.</p>
                 <div class="image-container">
-                    <img src="Image/space.jpg" alt="Itenerary">
+                    <img src="Image/space.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Itinerary">
                     <a href="space_adventure.html" class="overlay-link">
                         <button class="explore-button">Explore</button>
                     </a>
                 </div>
             </div>
-            <div class="sub-section">
+            <div class="sub-section reveal reveal-delay-2">
+                <i class="fas fa-graduation-cap card-icon"></i>
                 <h2>Cosmos Classroom</h2>
-                <p>Embark on unforgettable journeys.</p>
+                <p>Embark on unforgettable educational journeys through space.</p>
                 <div class="image-container">
-                    <img src="Image/cosmos.jpg" alt="Cosmos">
+                    <img src="Image/cosmos.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Cosmos">
                     <a href="cosmos_classroom.html" class="overlay-link">
                         <button class="explore-button">Explore</button>
                     </a>
                 </div>
             </div>
-            <div class="sub-section">
+            <div class="sub-section reveal reveal-delay-3">
+                <i class="fas fa-rocket card-icon"></i>
                 <h2>Experience</h2>
-                <p>Create lasting memories.</p>
+                <p>Create lasting memories with our immersive space travel programs.</p>
                 <div class="image-container">
-                    <img src="Image/experience.jpg" alt="Experience">
+                    <img src="Image/experience.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="Experience">
                     <a href="travel_experience.html" class="overlay-link">
                         <button class="explore-button">Explore</button>
                     </a>
                 </div>
             </div>
-            <div class="sub-section">
+            <div class="sub-section reveal reveal-delay-4">
+                <i class="fas fa-vr-cardboard card-icon"></i>
                 <h2>VR</h2>
-                <p>Immerse yourself in virtual worlds.</p>
+                <p>Immerse yourself in virtual worlds before your real journey begins.</p>
                 <div class="image-container">
-                    <img src="Image/vr.jpg" alt="VR">
+                    <img src="Image/vr.jpg" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1a1a4e, #0d0d2a)'" alt="VR">
                     <a href="vr.html" class="overlay-link">
                         <button class="explore-button">Explore</button>
                     </a>
@@ -153,136 +511,206 @@
         </section>
     </section>
 
+    <!-- Customize Itinerary -->
     <section class="customize">
-        <h1>Customize Itenerary</h1>
-        <section class="customize_Itenerary">
+        <div class="section-header reveal">
+            <h1>Customize Itinerary</h1>
+            <div class="section-divider"></div>
+            <p>Plan your perfect cosmic journey with our easy-to-use booking system.</p>
+        </div>
+        <section class="customize_Itenerary reveal">
             <div class="booking-form-box">
                 <div class="radio-btn">
-                    <input type="radio" class="btn" name="check" checked="checked"><span>Roundtrip</span>
-                    <input type="radio" class="btn" name="check"><span>One Way</span>
-                    <input type="radio" class="btn" name="check"><span>Multi-City</span>
+                    <label><input type="radio" class="btn" name="check" checked="checked"><span>Roundtrip</span></label>
+                    <label><input type="radio" class="btn" name="check"><span>One Way</span></label>
+                    <label><input type="radio" class="btn" name="check"><span>Multi-City</span></label>
                 </div>
-
                 <div class="booking-form">
                     <label>Flying From</label>
                     <input type="text" class="form-control" placeholder="City or Airport">
                     <label>Flying To</label>
                     <input type="text" class="form-control" placeholder="City or Airport">
-                    <div>
-
-                        <div class="input-grp">
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6 input-grp">
                             <label>Departing</label>
                             <input type="date" class="form-control select-date">
                         </div>
-
-                        <div class="input-grp">
+                        <div class="col-md-6 input-grp">
                             <label>Returning</label>
                             <input type="date" class="form-control select-date">
                         </div>
-
-                        <div class="input-grp">
+                        <div class="col-md-4 input-grp">
                             <label>Adults</label>
-                            <input type="number" class="form-control" value="0">
+                            <input type="number" class="form-control" value="1" min="1">
                         </div>
-
-                        <div class="input-grp">
+                        <div class="col-md-4 input-grp">
                             <label>Children</label>
-                            <input type="number" class="form-control" value="0">
+                            <input type="number" class="form-control" value="0" min="0">
                         </div>
-                        <div class="input-grp">
+                        <div class="col-md-4 input-grp">
                             <label>Travel Class</label>
                             <select class="custom-select">
                                 <option value="1">First Class</option>
-                                <!-- <option value="2">Buisness Class</option> -->
+                                <option value="2">Business Class</option>
+                                <option value="3">Economy</option>
                             </select>
                         </div>
-
-                        <div class="input-grp">
-                            <button type="button" class="btn btn-primary" flight><a href="#">Show Flights</a></button>
+                        <div class="col-12 input-grp">
+                            <button type="button" class="btn btn-primary w-100" onclick="location.href='space_adventure.html'">
+                                <i class="fas fa-search"></i> Show Flights
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
         </section>
     </section>
 
-
+    <!-- About Us -->
     <section id="about-us">
-        <!-- Content about your team goes here -->
-        <h1>About Our Space Tourism Company</h1>
-        <section class="team">
-            <h2>Our Team</h2>
-            <p>Dive into the vast expanse of the solar system with our dedicated team! Our crew is an eclectic blend of
-                astronomers, space enthusiasts, software developers, and travel enthusiasts, each bringing their unique
-                expertise to the table. Together, we strive to offer an unparalleled journey through space – educating,
-                inspiring, and making celestial dreams a tangible reality. Join us as we embark on this stellar
-                adventure!</p>
-        </section>
-        <section class="mission-vision">
-            <h2>Mission and Vision</h2>
-            <p><strong>Mission:</strong> Our mission is to empower curious minds to explore, understand, and embark on
-                personalized journeys through our solar system, fostering a deeper connection to the cosmos and
-                inspiring the next generation of space explorers.</p>
-            <p><strong>Vision:</strong> Our vision is to revolutionize the way humanity interacts with the cosmos,
-                creating a seamless fusion of education and exploration that makes interplanetary travel as accessible
-                and personalized as any terrestrial journey.</p>
-        </section>
-        <section class="unique-selling-point">
-            <h2>What Sets Us Apart</h2>
-            <p>We distinguish ourselves in the space tourism sector by offering comprehensive educational content
-                alongside personalized travel experiences. Our cutting-edge tools provide an immersive pre-travel
-                exploration, while our commitment to sustainability and extensive collaborations with space agencies and
-                institutions ensure authenticity and responsibility. Beyond just travel, we foster a community of shared
-                experiences, making us a bridge between curiosity and cosmic understanding.</p>
-        </section>
-    </section>
-
-    <!-- Contact form goes here -->
-    <section class="contact-form">
-        <h1>Contact Us</h1>
-        <h2>Contact Form</h2>
-        <form action="#" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-    <section class="contact-info">
-        <h2>Contact Information</h2>
-        <p><strong>Email:</strong> contact@spacecompany.com</p>
-        <p><strong>Phone:</strong> +1 (123) 456-7890</p>
-        <p><strong>Address:</strong> 123 Space Street, Galaxy City, Universe</p>
-    </section>
-    </section>
-
-    <!--Book Now-->
-    <section class="embark">
-        <div id="logo"></div>
-        <h1>Embark Today</h1>
-        <pre>
-        Your out-of-this-world adventure is a few clicks away! 
-        Don't hesitate to embark on the trip of a lifetime.
-        Explore the mysteries of the solar system with us - get 
-        started by booking your cosmic journey today.
-        </pre>
-        <div class="buttons">
-            <a href="space_adventure.html" class="button" style="align-content: center;">Reserve your Spot</a>
+        <div class="section-header reveal">
+            <h1>About Our Space Tourism Company</h1>
+            <div class="section-divider"></div>
+            <p>We are pioneers in making space accessible to everyone with passion and expertise.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card reveal reveal-delay-1">
+                <h2><i class="fas fa-users"></i> Our Team</h2>
+                <p>Our crew is an eclectic blend of astronomers, space enthusiasts, software developers, and travel experts, each bringing their unique expertise to craft extraordinary journeys.</p>
+            </div>
+            <div class="about-card reveal reveal-delay-2">
+                <h2><i class="fas fa-bullseye"></i> Mission & Vision</h2>
+                <p><strong>Mission:</strong> Empower curious minds to explore, understand, and embark on personalized journeys through our solar system.</p>
+                <p><strong>Vision:</strong> Revolutionize the way humanity interacts with the cosmos.</p>
+            </div>
+            <div class="about-card reveal reveal-delay-3">
+                <h2><i class="fas fa-star"></i> What Sets Us Apart</h2>
+                <p>We distinguish ourselves by offering comprehensive educational content alongside personalized travel experiences, making every journey both thrilling and enlightening.</p>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p style="text-align: center;">&copy; 2023 Celestial Voyages. All rights reserved.</p>
-    </footer>
-
-    <script src="../Js/script.js"></script>
+    <!-- Contact -->
     
 
+    <!-- Embark CTA -->
+    <section class="embark reveal">
+        <h1>Embark Today</h1>
+        <p class="lead-text">Your out-of-this-world adventure is just a few clicks away! Do not hesitate to embark on the trip of a lifetime. Explore the mysteries of the solar system with us and get started by booking your cosmic journey today.</p>
+        <div class="buttons">
+            <a href="ticket.html" class="button"><i class="fas fa-ticket-alt"></i> Reserve Your Spot</a>
+        </div>
+    </section>
 
+<section id="contact">
+        <div class="section-header reveal">
+            <h1>Contact Us</h1>
+            <div class="section-divider"></div>
+            <p>Have questions? We would love to hear from you. Reach out to our team.</p>
+        </div>
+        <div class="contact-wrapper">
+            <div class="contact-form reveal">
+                <h2>Send a Message</h2>
+                <form action="#" method="post">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info-side reveal reveal-delay-2">
+                <h2>Get in Touch</h2>
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div><strong>Email</strong><p>contact@spacecompany.com</p></div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone"></i>
+                    <div><strong>Phone</strong><p>+1 (123) 456-7890</p></div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div><strong>Address</strong><p>123 Space Street, Galaxy City, Universe</p></div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-clock"></i>
+                    <div><strong>Hours</strong><p>Mon - Sat: 9:00 AM - 8:00 PM</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Celestial Voyages. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="space_adventure.html">Adventures</a>
+                <a href="cosmos_classroom.html">Learn</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <p>Designed & Developed by <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Jolok Banarjee</a></p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/stars.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 400);
+        });
+
+        // Navbar scroll effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll Reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+    </script>
 </body>
-
 </html>

@@ -1,297 +1,707 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="icon" href="image/icon.png">
-    <title>Explore the Universe with Us | Premium Tourism Services</title>
-    <meta name="description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <meta name="keywords"
-        content="explore the universe, ultimate adventure, premium tourism services, discover new frontiers, unforgettable memories, Space Travel, Dhaka, travel experience, weekend getaway, month-long adventure, experienced professionals, book your ticket, wide range of travel packages, luxury cruises, backpacking adventures, plan the trip of a lifetime">
-
-    <meta property="og:title" content="Explore the Universe with Us | Premium Tourism Services">
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="Experience the ultimate adventure with our premium tourism services. Discover new frontiers and create unforgettable memories.">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
-        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
-    <link rel="stylesheet" href="../../css/subEdu.css" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../Image/icon.png">
+    <title>Moon Exploration | Celestial Voyages</title>
+    <meta name="description" content="Experience the ultimate adventure with our premium space tourism services.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/slide.css">
     <style>
-        .embark {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 10vh;
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--bg-dark, #0f0f23);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-ring {
+            width: 60px; height: 60px; border: 3px solid rgba(233,69,96,0.2);
+            border-top-color: #e94560; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-            .buttons {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
+        /* ===== NAVBAR ===== */
+        .navbar { padding: 0.6rem 0 !important; transition: all 0.3s ease; }
+        .navbar.scrolled {
+            background: rgba(15,15,35,0.98) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 0.4rem 0 !important;
+        }
+        .navbar-brand h1 {
+            font-size: 1.4rem !important; font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            letter-spacing: 0.5px; margin: 0;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light, #f5f5f5); border-radius: 50px;
+            padding: 0.4rem 1.2rem; font-size: 0.85rem; font-weight: 500;
+            transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-btn:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: #fff; transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .navbar-nav { gap: 0.3rem; }
+        .navbar-nav .nav-link {
+            color: var(--text-muted, #a0a0a0) !important;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.5rem 0.9rem !important; border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--accent, #e94560) !important;
+            background: rgba(233,69,96,0.1);
+        }
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.6rem;
+        }
+        .navbar-collapse {
+            background: rgba(15,15,35,0.98);
+            padding: 1rem; border-radius: 12px; margin-top: 0.5rem;
+        }
+        .navbar-collapse:not(.show) { display: none; }
+        @media (min-width: 992px) {
+            .navbar-collapse, .navbar-collapse:not(.show), .navbar-collapse.collapse {
+                display: flex !important; flex-basis: auto;
+                background: transparent; padding: 0; margin-top: 0;
             }
+            .navbar-nav { flex-direction: row; }
+            .navbar-toggler { display: none !important; }
+        }
 
-            .button {
-                margin: 0 10px;
-                padding: 10px 20px;
-                font-size: 16px;
-                background-color: #007BFF;
-                color: white;
-                border: none;
-                cursor: pointer;
-                text-align: center;
-                text-decoration: none;
-                border-radius: 5px;
-            }
+        /* ===== HERO BANNER ===== */
+        .page-hero {
+            position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 500px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .page-hero img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; filter: brightness(0.4);
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(15,15,35,0.3) 0%, rgba(15,15,35,0.8) 100%);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 0 1rem;
+        }
+        .page-hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .page-hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.8);
+            max-width: 600px; margin: 0 auto;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 3rem; margin-top: 1.5rem;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 1.8rem; font-weight: 800; color: var(--accent, #e94560); }
+        .hero-stat .label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
 
-            .button:hover {
-                background-color: #0056b3;
-            }
+        /* ===== CONTENT SECTIONS ===== */
+        .content-section {
+            max-width: 1000px; margin: 0 auto; padding: 3rem 1rem;
+        }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-header h2 {
+            font-size: 1.8rem; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-header p { color: var(--text-muted, #a0a0a0); max-width: 600px; margin: 0 auto; }
+        .section-divider {
+            width: 60px; height: 4px; border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent, #e94560), transparent);
+            margin: 0 auto 1.5rem;
+        }
 
-            @font-face {
-                src: url();
-                font-family: 'Phudu', cursive;
-                font-family: 'Poppins', sans-serif;
-                font-family: 'Roboto', sans-serif;
-            }
+        /* ===== CARDS ===== */
+        .info-card {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden;
+        }
+        .info-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--accent, #e94560), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .info-card:hover::before { opacity: 1; }
+        .info-card:hover {
+            border-color: var(--border-glow, rgba(233,69,96,0.4));
+            box-shadow: 0 0 30px var(--accent-glow, rgba(233,69,96,0.3));
+            transform: translateY(-5px);
+        }
+        .info-card h3 {
+            font-size: 1.3rem; color: var(--accent, #e94560);
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+        }
+        .info-card h3 i { font-size: 1.1rem; }
+        .info-card p {
+            color: var(--text-muted, #a0a0a0); font-size: 0.95rem; line-height: 1.7;
+        }
 
+        /* ===== DESTINATION CARDS ===== */
+        .dest-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem; margin-top: 2rem;
+        }
+        .dest-card {
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .dest-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--accent, #e94560), #f4d03f);
+            opacity: 0; transition: opacity 0.4s ease; z-index: 2;
+        }
+        .dest-card:hover::before { opacity: 1; }
+        .dest-card:hover {
+            border-color: var(--border-glow, rgba(233,69,96,0.4));
+            box-shadow: 0 0 40px var(--accent-glow, rgba(233,69,96,0.3));
+            transform: translateY(-8px);
+        }
+        .dest-image-wrap {
+            position: relative; overflow: hidden; aspect-ratio: 16/10;
+        }
+        .dest-image-wrap img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .dest-card:hover .dest-image-wrap img { transform: scale(1.08); }
+        .dest-body { padding: 1.5rem; }
+        .dest-body h4 {
+            font-size: 1.2rem; color: var(--text-light, #f5f5f5);
+            margin-bottom: 0.5rem;
+        }
+        .dest-body p {
+            color: var(--text-muted, #a0a0a0); font-size: 0.9rem;
+            line-height: 1.6; margin: 0;
+        }
+
+        /* ===== RESORT SECTION ===== */
+        .resort-section {
+            max-width: 1000px; margin: 0 auto; padding: 3rem 1rem;
+        }
+        .resort-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2rem; align-items: center;
+        }
+        .resort-image {
+            border-radius: 20px; overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        .resort-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .resort-image:hover img { transform: scale(1.05); }
+        @media (max-width: 768px) {
+            .resort-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== RESERVE CTA ===== */
+        .reserve-cta {
+            max-width: 800px; margin: 3rem auto;
+            background: var(--glass, rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 3rem 2rem;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .reserve-cta::after {
+            content: ''; position: absolute; top: -50%; right: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(233,69,96,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .reserve-cta h2 {
+            font-size: 1.8rem; margin-bottom: 0.5rem; position: relative; z-index: 1;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .reserve-cta p {
+            color: var(--text-muted, #a0a0a0); font-size: 1.05rem;
+            margin-bottom: 1.5rem; position: relative; z-index: 1;
+        }
+        .btn-reserve {
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; border-radius: 50px; padding: 1rem 2.5rem;
+            color: white; font-weight: 600; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s ease;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+            position: relative; z-index: 1;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .btn-reserve:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(233,69,96,0.5);
+            color: white;
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ===== FOOTER ===== */
+        footer { padding: 3rem 1rem; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted, #a0a0a0); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent, #e94560); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted, #a0a0a0); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: all 0.3s ease; text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: white; transform: translateY(-2px);
+        }
+        .developer-credit {
+            text-align: center; margin-top: 1.5rem;
+            padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .developer-credit p { color: var(--text-muted, #a0a0a0); font-size: 0.9rem; margin: 0; }
+        .developer-credit a {
+            color: var(--accent, #e94560); text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+        }
+        .developer-credit a:hover { color: #fff; text-shadow: 0 0 10px rgba(233,69,96,0.5); }
+        .developer-credit i { margin-right: 0.3rem; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent, #e94560) 0%, #c73e54 100%);
+            border: none; color: white; font-size: 1.1rem;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease; z-index: 999;
+            box-shadow: 0 4px 15px rgba(233,69,96,0.4);
+            display: flex; align-items: center; justify-content: center;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+
+        @media (max-width: 768px) {
+            .hero-stats { gap: 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .dest-grid { grid-template-columns: 1fr; }
         }
     </style>
-
-
 </head>
-
 <body>
+    <!-- Preloader -->
+    <div id="preloader"><div class="loader-ring"></div></div>
 
+    <canvas id="stars" class="stars"></canvas>
 
-    <div class="wrapper">
-        <div>
-            <div id="open-nav-btn" class="ham-nav-arrow-btn show">
-                <i class="far fa-arrow-alt-circle-right arrow"></i>
-            </div>
-            <div id="close-nav-btn" class="ham-nav-arrow-btn hide">
-                <i class="far fa-arrow-alt-circle-left arrow"></i>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html"><h1>Celestial Voyages: A Dream Come True</h1></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../../space_adventure.html">Adventures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../cosmos_classroom.html">Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../vr.html">VR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../travel_experience.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-lg-3">
+                    <a href="../../ticket.html" class="nav-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="../../signup.html" class="nav-btn"><i class="fas fa-user"></i> My Account</a>
+                </div>
             </div>
         </div>
+    </nav>
 
+    <!-- Hero Banner -->
+    <section class="page-hero" style="padding:0; max-width:100%;">
+        <img src="image/5.jpg" alt="Moon">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Moon Exploration</h1>
+            <p>Experience Earthrise from the lunar surface and explore the eternal shadows of the Moon's polar craters.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="num">1</div><div class="label">Month</div></div>
+                <div class="hero-stat"><div class="num">$500K</div><div class="label">Per Person</div></div>
+                <div class="hero-stat"><div class="num">6</div><div class="label">Destinations</div></div>
+            </div>
+        </div>
+    </section>
 
-        <div class="navigation">
-            <nav id="navbar">
-                <header id="navbar-header">
-                    <div>
-                        <i class="fab fa-Celestial"></i>
-                        <span>Celestial &nbsp;Voyages</span>
-                    </div>
-                </header>
-                <ul class="nav-list nobullets">
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#MOON">MOON</a>
+    <!-- Overview -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Overview</h2>
+            <div class="section-divider"></div>
+            <p>Moon tourism is now a reality. Experience the thrill of visiting another world, walking on the lunar surface, and witnessing Earthrise from the Sea of Tranquility.</p>
+        </div>
+        <div class="info-card reveal reveal-delay-1">
+            <h3><i class="fas fa-info-circle"></i> About This Journey</h3>
+            <p>The Moon is our closest celestial neighbor and the first destination for space tourism. From the historic Apollo landing sites to the stunning lunar highlands, this journey offers a unique blend of history, science, and adventure. Experience 1/6th gravity, walk where legends walked, and see Earth as a fragile blue marble suspended in the void.</p>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Featured Destinations</h2>
+            <div class="section-divider"></div>
+            <p>Explore the most iconic and fascinating locations on the lunar surface.</p>
+        </div>
+        <div class="dest-grid">
+            <div class="dest-card reveal reveal-delay-1">
+                <div class="dest-image-wrap">
+                    <img src="image/1.png" alt="The Selenean Summit">
+                </div>
+                <div class="dest-body">
+                    <h4>The Selenean Summit</h4>
+                    <p>The highest point on the Moon at 10,786 meters, located on the far side. Nearly 20% taller than Mount Everest relative to its surroundings.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal reveal-delay-2">
+                <div class="dest-image-wrap">
+                    <img src="image/3.png" alt="Rima Ariadaeus">
+                </div>
+                <div class="dest-body">
+                    <h4>Rima Ariadaeus</h4>
+                    <p>A 300 km long linear rille formed by crustal faulting between Mare Vaporum and Mare Tranquillitatis. One of the most prominent rilles on the Moon.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal reveal-delay-3">
+                <div class="dest-image-wrap">
+                    <img src="image/5.jpg" alt="Mare Tranquillitatis">
+                </div>
+                <div class="dest-body">
+                    <h4>Mare Tranquillitatis</h4>
+                    <p>The Sea of Tranquility — the first location on another celestial body visited by humans. Apollo 11 landed here in 1969, marking humanity's first steps on another world.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal reveal-delay-1">
+                <div class="dest-image-wrap">
+                    <img src="image/7.jpg" alt="Mons Pico">
+                </div>
+                <div class="dest-body">
+                    <h4>Mons Pico</h4>
+                    <p>A solitary lunar mountain in Mare Imbrium, 25 km long and rising 2.4 km high. Made of highly reflective anorthosite rock, it shines brilliantly against the dark mare.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal reveal-delay-2">
+                <div class="dest-image-wrap">
+                    <img src="image/9.jpg" alt="Mons Hadley">
+                </div>
+                <div class="dest-body">
+                    <h4>Mons Hadley</h4>
+                    <p>A 4.6 km high massif in the Montes Apenninus range. The Apollo 15 mission explored its lower slopes, collecting some of the oldest rocks on the Moon.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal reveal-delay-3">
+                <div class="dest-image-wrap">
+                    <img src="image/11.jpg" alt="Schroter's Valley">
+                </div>
+                <div class="dest-body">
+                    <h4>Schroter's Valley</h4>
+                    <p>The largest sinuous rille on the Moon at 250 km long. Named after astronomer Johann Schröter, this valley reveals the Moon's dramatic volcanic past.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lunar Grand Resort -->
+    <section class="resort-section">
+        <div class="section-header reveal">
+            <h2>Lunar Grand Resort</h2>
+            <div class="section-divider"></div>
+            <p>Your home away from Earth during your lunar adventure.</p>
+        </div>
+        <div class="resort-grid reveal">
+            <div class="info-card">
+                <h3><i class="fas fa-hotel"></i> About the Resort</h3>
+                <p>Located in the Mare Tranquillitatis, the Lunar Grand Resort is built underground to protect guests from the harsh lunar environment — radiation, micrometeoroids, and extreme temperature swings. The resort features panoramic observation domes, Earth-view suites, lunar surface excursion vehicles, and a zero-G recreation center.</p>
+                <br>
+                <h3><i class="fas fa-utensils"></i> Resort Activities</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                    <li style="color: var(--text-muted, #a0a0a0); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-walking" style="color: var(--accent, #e94560);"></i> Walk on the lunar surface with guided excursions
                     </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#The_Selenean_Summit ">1. The Selenean Summit </a>
+                    <li style="color: var(--text-muted, #a0a0a0); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-mountain" style="color: var(--accent, #e94560);"></i> Explore lunar craters and mountains
                     </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#Rima_Ariadaeus">2. Rima Ariadaeus</a>
+                    <li style="color: var(--text-muted, #a0a0a0); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-camera" style="color: var(--accent, #e94560);"></i> Photography workshops in Earthrise viewing domes
                     </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#Mare_Tranquillitatis">3. Mare Tranquillitatis</a>
+                    <li style="color: var(--text-muted, #a0a0a0); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-flask" style="color: var(--accent, #e94560);"></i> Participate in ongoing scientific research
                     </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#Mons_Pico">4. Mons Pico</a>
-                    </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#Mons_Hadley">5. Mons Hadley</a>
-                    </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#Schroter_Valley">6. Schroter's Valley</a>
-                    </li>
-                    <li>
-                        <a class="nav-link notextdec link-grey" href="#Reserve_your_Spot">Reserve your Spot</a>
+                    <li style="color: var(--text-muted, #a0a0a0); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-star" style="color: var(--accent, #e94560);"></i> Stargazing without atmospheric interference
                     </li>
                 </ul>
-            </nav>
+            </div>
+            <div class="resort-image">
+                <img src="image/6.jpg" alt="Lunar Resort">
+            </div>
         </div>
+    </section>
 
-
-        <main id="main-doc">
-            <section class="main-section" id="MOON">
-                <header>MOON</header>
-                <article>
-
-                </article>
-            </section>
-
-            <section class="main-section" id="The_Selenean_Summit ">
-                <header>1. The Selenean Summit </header>
-                <article>
-                    <P>The Selenean summit is the highest point on the Moon, located along the north-eastern rim of
-                        Engel'gardt crater. It rises to an elevation of 10,786 meters above the lunar mean, which is
-                        nearly twenty percent taller than Earth's relative highest point, Mount Everest. The summit is
-                        located on the far side of the Moon relative to Earth. It has been imaged by the Lunar
-                        Reconnaissance Orbiter (LRO) and other spacecraft. The summit is a relatively young feature,
-                        having been formed by the impact of a large asteroid or comet only a few hundred million years
-                        ago. The Selenean summit is a valuable target for future lunar exploration. It is a unique
-                        geological feature that can provide insights into the Moon's formation and evolution. It is also
-                        a potential site for future human settlement, as it offers a relatively safe and stable
-                        environment. In addition to its scientific and practical importance, the Selenean summit is also
-                        a symbol of human achievement. It is the highest point on another world, and reaching it would
-                        be a truly remarkable feat.</P>
-                    <img src="image/1.png" alt="" width="360" height="260">
-                    <img src="image/2.png" alt="" width="360" height="260">
-                </article>
-            </section>
-
-            <section class="main-section" id="Rima_Ariadaeus">
-                <header>2. Rima Ariadaeus</header>
-                <article>
-                    <P>Rima Ariadaeus is a linear rille on the Moon, located between Mare Vaporum and Mare
-                        Tranquillitatis. It is over 300 kilometers long and 5 kilometers wide, and has a depth of about
-                        500 meters. Rima Ariadaeus is one of the most prominent linear rilles on the Moon. Rima
-                        Ariadaeus is thought to have formed when a section of the Moon's crust sank down between two
-                        parallel fault lines. This type of feature is called a graben. Rima Ariadaeus shows no trace of
-                        associated volcanism, which suggests that it was formed by pure faulting. The floor of Rima
-                        Ariadaeus is relatively smooth, with a few scattered craters. The walls of the rille are steep
-                        and rugged, and are marked by several scarps, which are cliffs or ridges that have formed along
-                        the fault lines. Rima Ariadaeus is a fascinating geological feature, and it is one of the most
-                        well-studied rilles on the Moon. It provides insights into the Moon's interior structure and
-                        tectonic processes.Rima Ariadaeus is also a beautiful sight. The long, straight rille cuts
-                        through the lunar landscape, creating a striking contrast between the dark mare basalts and the
-                        lighter highlands. Rima Ariadaeus is a reminder of the Moon's dynamic past.</P>
-                    <img src="image/3.png" alt="" width="360" height="260">
-                    <img src="image/4.jpg" alt="" width="360" height="260">
-                </article>
-            </section>
-
-            <section class="main-section" id="Mare_Tranquillitatis">
-                <header>3. Mare Tranquillitatis</header>
-                <article>
-                    <P>Mare Tranquillitatis, also known as the Sea of Tranquility, is a lunar mare that sits within the
-                        Tranquillitatis basin on the Moon. It is the first location on another celestial body to be
-                        visited by humans. Mare Tranquillitatis is a relatively smooth plain, with a few scattered
-                        craters and mountains.The Tranquillitatis basin is thought to have been formed by a large impact
-                        in the Moon's early history, likely more than 3.9 billion years ago. The impact created a crater
-                        that was about 1,400 kilometers wide and 8 kilometers deep. Over time, lava flowed into the
-                        crater, filling it and creating the mare. Mare Tranquillitatis is a popular destination for
-                        lunar exploration. It is relatively flat and smooth, making it a good place to land spacecraft.
-                        It is also relatively safe from the harmful radiation that bombards the Moon's surface. In 1969,
-                        Apollo 11 landed on Mare Tranquillitatis, becoming the first crewed mission to land on another
-                        celestial body. Neil Armstrong and Buzz Aldrin spent two and a half hours on the Moon,
-                        collecting samples and conducting experiments. Mare Tranquillitatis is a special place in human
-                        history. It is the place where humanity first took its first steps on another world. It is a
-                        reminder of our potential and our ability to achieve great things.</P>
-                    <img src="image/5.jpg" alt="" width="360" height="260">
-                    <img src="image/6.jpg" alt="" width="360" height="260">
-                </article>
-            </section>
-
-            <section class="main-section" id="Mons_Pico">
-                <header>4. Mons Pico</header>
-                <article>
-                    <P>Mons Pico is a solitary lunar mountain that lies in the northern part of the Mare Imbrium basin,
-                        to the south of the dark-floored crater Plato and on the southern rim of a ghost crater. It is a
-                        very reflective and bright object, and forms an elongated feature with a length of 25 kilometers
-                        (oriented northwest-southeast) and a width of 15 km. The peak rises to a height of 2.4
-                        kilometers, comparable to the maximum altitude of the Montes Teneriffe. Mons Pico is thought to
-                        have formed as part of the inner ring of the Imbrium basin, which was created by a massive
-                        impact event billions of years ago. The mountain is made up of highly reflective anorthosite
-                        rock, which is why it appears so bright. Mons Pico has been featured in several works of science
-                        fiction, including the novels Blast Off at Woomera by Hugh Walters and Earthlight by Arthur C.
-                        Clarke. Mons Pico is a fascinating and mysterious object, and it is one of the most prominent
-                        mountains on the Moon. It is a reminder of the violent and chaotic history of our celestial
-                        neighbor.</P>
-                    <img src="image/7.jpg" alt="" width="360" height="260">
-                    <img src="image/8.jpg" alt="" width="360" height="260">
-                </article>
-            </section>
-
-            <section class="main-section" id="Mons_Hadley">
-                <header>5. Mons Hadley</header>
-                <article>
-                    <P>Mons Hadley is a massif in the northern portion of the Montes Apenninus, a range in the northern
-                        hemisphere of the Moon. It has a height of 4.6 kilometers (2.8 miles) above the adjacent plain
-                        and a maximum diameter of 25 kilometers (15.5 miles) at the base. Mons Hadley is a relatively
-                        young feature, having formed less than a billion years ago. It is thought to have been formed by
-                        a series of volcanic eruptions that occurred along a fault line. The massif is made up of a
-                        variety of volcanic rocks, including basalt, andesite, and pyroclastic deposits. Mons Hadley is
-                        located near the Apollo 15 landing site. The astronauts on this mission explored the lower
-                        slopes of Mons Hadley Delta, the smaller massif to the south. They collected a variety of
-                        samples from the area, including rocks that are thought to be some of the oldest on the Moon.
-                        Mons Hadley is a significant feature on the Moon because it provides scientists with a unique
-                        opportunity to study the Moon's volcanic history. The massif is also a valuable source of
-                        information about the Moon's composition and evolution.Mons Hadley is a fascinating and
-                        important feature on the Moon. It is a reminder of the Moon's dynamic past and a valuable
-                        resource for scientists who are studying our celestial neighbor.</P>
-                    <img src="image/9.jpg" alt="" width="360" height="260">
-                    <img src="image/10.jpg" alt="" width="360" height="260">
-                </article>
-            </section>
-
-            <section class="main-section" id="Schroter_Valley">
-                <header>6. Schroter's Valley</header>
-                <article>
-                    <P>Schroter's Valley, also known as Vallis Schröteri, is a sinuous valley or rille on the surface of
-                        the Moon. It is located on a rise of continental ground, sometimes called the Aristarchus
-                        plateau, that is surrounded by the Oceanus Procellarum to the south and west and the Mare
-                        Imbrium to the northwest. At the southern edge of this rise are the craters Aristarchus and
-                        Herodotus.Schroter's Valley is the largest sinuous rille on the Moon. It is about 250 kilometers
-                        long and 10 kilometers wide, and it winds its way across the Aristarchus plateau in a series of
-                        loops and bends. The valley is thought to have been formed by lava flows that erupted from a
-                        series of fissures in the plateau. The valley is named after the German astronomer Johann
-                        Hieronymus Schröter, who first observed it in the late 18th century. Schröter was fascinated by
-                        the valley, and he wrote extensively about it in his notebooks. He speculated that the valley
-                        might have been formed by a river on the Moon, or by a giant worm that had burrowed its way
-                        across the surface. Scientists now believe that Schroter's Valley was formed by lava flows. The
-                        valley is filled with a dark material that is thought to be volcanic ash and debris. The ash and
-                        debris have been smoothed out by the flow of lava, giving the valley its characteristic sinuous
-                        appearance. Schroter's Valley is a fascinating and mysterious feature on the Moon. It is a
-                        reminder of the Moon's volcanic past, and it is a valuable source of information for scientists
-                        who are studying the Moon's formation and evolution.</P>
-                    <img src="image/11.jpg" alt="" width="360" height="260">
-                    <img src="image/12.jpg" alt="" width="360" height="260">
-                </article>
-            </section>
-
-            <section class="main-section" id="Reserve_your_Spot">
-                <div class="buttons embark">
-                    <a href="../../ticket.pdf" class="button" style="align-content: center;">Reserve your Spot</a>
+    <!-- Location & Details -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Tour Details</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-rocket" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i><strong style="color: var(--text-light, #f5f5f5);">Pick-up:</strong> Wallops Flight Facility, Virginia, USA
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-moon" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i><strong style="color: var(--text-light, #f5f5f5);">Destination:</strong> Mare Tranquillitatis, Moon
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-clock" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i><strong style="color: var(--text-light, #f5f5f5);">Duration:</strong> 1 Month
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-users" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i><strong style="color: var(--text-light, #f5f5f5);">Group Size:</strong> Up to 12 passengers
+                        </li>
+                    </ul>
                 </div>
-            </section>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card">
+                    <h3><i class="fas fa-clipboard-check"></i> Requirements</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-passport" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i>Valid passport and space travel clearance
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-id-card" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i>Government-issued ID with verification
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-heartbeat" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i>Medical clearance for space travel
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-calendar-check" style="color: var(--accent, #e94560); width: 20px; text-align: center;"></i>Arrive at facility 14 days before departure
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        </main>
-    </div>
+    <!-- Travel Tips -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Travel Tips</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card">
+                    <h3><i class="fas fa-shield-alt"></i> Safety Tips</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-temperature-low" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Be prepared for extreme temperature swings (-173°C to 127°C) and vacuum conditions</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-radiation" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Always wear protective gear outside the resort — radiation levels are high without atmospheric shielding</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-shoe-prints" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Move carefully in 1/6th gravity — falls are slower but regolith is abrasive</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-headset" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Stay in contact with your guide at all times during surface excursions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card">
+                    <h3><i class="fas fa-lightbulb"></i> Additional Tips</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-bed" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Get plenty of rest — lunar days are 29.5 Earth days long, adjust your sleep cycle accordingly</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-tint" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Stay hydrated — recycled water is precious, but dehydration is a real risk in pressurized environments</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-running" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Exercise daily — low gravity causes muscle atrophy and bone density loss</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-brain" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Take care of your mental health — isolation and Earth-out-of-view phenomenon can be challenging</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Policy -->
+    <section class="content-section">
+        <div class="section-header reveal">
+            <h2>Policies</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="info-card">
+                    <h3><i class="fas fa-ban"></i> Cancellation Policy</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-envelope" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Send cancellation email to tours@voyegar.com with booking ID and details</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-clock" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Email timestamp will be considered as the time of cancellation</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-phone-slash" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>Phone calls will not be considered as cancellation requests</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="info-card">
+                    <h3><i class="fas fa-undo"></i> Refund Policy</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-check" style="color: #42b983; margin-top: 0.2rem;"></i>
+                            <span>Full refund if cancelled 45+ days before departure</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-times" style="color: #e94560; margin-top: 0.2rem;"></i>
+                            <span>No refund if cancelled less than 45 days before departure</span>
+                        </li>
+                        <li style="color: var(--text-muted, #a0a0a0); padding: 0.5rem 0; display: flex; align-items: flex-start; gap: 0.6rem;">
+                            <i class="fas fa-hourglass-half" style="color: var(--accent, #e94560); margin-top: 0.2rem;"></i>
+                            <span>All refunds processed within 30 working days</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Reserve CTA -->
+    <section class="reserve-cta reveal">
+        <h2>Ready to Walk on the Moon?</h2>
+        <p>Secure your spot on the Moon Exploration Adventure. Limited seats available for the next lunar departure window.</p>
+        <a href="../../ticket.html" class="btn-reserve"><i class="fas fa-ticket-alt"></i> Reserve Your Spot</a>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div id="creator">Created by Jolok Banarjee</div>
-        <div class="footer-links">
-            <a href="https://github.com/jolok-banarjee" target="_blank" class="link-grey">
-                <p class="sr-only">github.com profile page</p>
-                <i class="fab fa-github fa-lg" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.instagram.com/jolokbanarjee/" target="_blank" class="link-grey">
-                <p class="sr-only">instagram.com profile page</p>
-                <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" class="link-grey">
-                <p class="sr-only">linkedin.com profile page</p>
-                <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-            </a>
+        <div class="footer-content">
+            <p>&copy; 2026 Celestial Voyages. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../space_adventure.html">Adventures</a>
+                <a href="../../cosmos_classroom.html">Learn</a>
+                <a href="../../index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <p>Designed & Developed by <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Jolok Banarjee</a></p>
         </div>
     </footer>
 
+    <!-- Back to Top -->
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="../JS/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/stars.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 400);
+        });
 
+        // Navbar scroll effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll Reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
-
 </html>

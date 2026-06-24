@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Image/icon.png">
+    <title>Print Your Ticket | Celestial Voyages</title>
+    <meta name="description" content="Print your space travel boarding pass for your interplanetary journey.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/ticket.css">
+    <style>
+        /* ===== NAVBAR (matching Jupiter/Saturn pages) ===== */
+        .navbar { padding: 0.6rem 0 !important; transition: all 0.3s ease; }
+        .navbar.scrolled {
+            background: rgba(15,15,35,0.98) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 0.4rem 0 !important;
+        }
+        .navbar-brand h1 {
+            font-size: 1.4rem !important; font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent, #e94560) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            letter-spacing: 0.5px; margin: 0;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light, #f5f5f5); border-radius: 50px;
+            padding: 0.4rem 1.2rem; font-size: 0.85rem; font-weight: 500;
+            transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-btn:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: #fff; transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+        .navbar-nav { gap: 0.3rem; }
+        .navbar-nav .nav-link {
+            color: var(--text-muted, #a0a0a0) !important;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.5rem 0.9rem !important; border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--accent, #e94560) !important;
+            background: rgba(233,69,96,0.1);
+        }
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.6rem;
+        }
+        .navbar-collapse {
+            background: rgba(15,15,35,0.98);
+            padding: 1rem; border-radius: 12px; margin-top: 0.5rem;
+        }
+        .navbar-collapse:not(.show) { display: none; }
+        @media (min-width: 992px) {
+            .navbar-collapse, .navbar-collapse:not(.show), .navbar-collapse.collapse {
+                display: flex !important; flex-basis: auto;
+                background: transparent; padding: 0; margin-top: 0;
+            }
+            .navbar-nav { flex-direction: row; }
+            .navbar-toggler { display: none !important; }
+        }
+
+        /* ===== FORM INPUTS: BLACK TEXT ===== */
+        .form-control, .form-select {
+            color: #000 !important;
+            background-color: #fff !important;
+        }
+        .form-control::placeholder {
+            color: #6c757d !important;
+        }
+        .form-control:focus, .form-select:focus {
+            color: #000 !important;
+            background-color: #fff !important;
+            border-color: #e94560;
+            box-shadow: 0 0 0 0.2rem rgba(233,69,96,0.25);
+        }
+        select option {
+            color: #000 !important;
+            background-color: #fff !important;
+        }
+        label {
+            color: var(--text-light, #f5f5f5);
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ===== FOOTER (matching Jupiter/Saturn pages) ===== */
+        footer { padding: 3rem 1rem; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted, #a0a0a0); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent, #e94560); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted, #a0a0a0); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: all 0.3s ease; text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--accent, #e94560); border-color: var(--accent, #e94560);
+            color: white; transform: translateY(-2px);
+        }
+        .developer-credit {
+            text-align: center; margin-top: 1.5rem;
+            padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .developer-credit p { color: var(--text-muted, #a0a0a0); font-size: 0.9rem; margin: 0; }
+        .developer-credit a {
+            color: var(--accent, #e94560); text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+        }
+        .developer-credit a:hover { color: #fff; text-shadow: 0 0 10px rgba(233,69,96,0.5); }
+        .developer-credit i { margin-right: 0.3rem; }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stars" class="stars"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1 no-print" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><h1>Celestial Voyages: A Dream Come True</h1></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="space_adventure.html">Adventures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cosmos_classroom.html">Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vr.html">VR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="travel_experience.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-lg-3">
+                    <a href="ticket.html" class="nav-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="signup.html" class="nav-btn"><i class="fas fa-user"></i> My Account</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="ticket-section no-print">
+        <h1>Your Space Travel Ticket</h1>
+        <p>Review your booking details below and print your official boarding pass.</p>
+        <div class="booking-form-container card-glass">
+            <h2>Enter Your Booking Details</h2>
+            <form id="ticketForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>Passenger Name</label>
+                        <input type="text" id="passengerName" class="form-control" placeholder="e.g. Jolok Banarjee" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dob" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>From</label>
+                        <select id="fromDest" class="form-control">
+                            <option value="Earth">Earth</option>
+                            <option value="Moon">Moon</option>
+                            <option value="Mars">Mars</option>
+                            <option value="Jupiter">Jupiter</option>
+                            <option value="Saturn">Saturn</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>To</label>
+                        <select id="toDest" class="form-control">
+                            <option value="Mars" selected>Mars</option>
+                            <option value="Moon">Moon</option>
+                            <option value="Jupiter">Jupiter</option>
+                            <option value="Saturn">Saturn</option>
+                            <option value="Earth">Earth</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Flight Number</label>
+                        <input type="text" id="flightNum" class="form-control" value="M 1236">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Seat Number</label>
+                        <input type="text" id="seatNum" class="form-control" value="1A">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Travel Class</label>
+                        <select id="travelClass" class="form-control">
+                            <option>First Class</option>
+                            <option>Business Class</option>
+                            <option>Economy</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Departure Date & Time</label>
+                        <input type="datetime-local" id="departDate" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Landing Date & Time</label>
+                        <input type="datetime-local" id="landDate" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Launch Site</label>
+                        <input type="text" id="launchSite" class="form-control" value="Cape Canaveral">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Landing Site</label>
+                        <input type="text" id="landingSite" class="form-control" value="Gusev Crater">
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-primary btn-lg" onclick="generateTicket()">
+                        <i class="fas fa-ticket-alt"></i> Generate & Preview Ticket
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="ticketPreview" class="ticket-preview-section" style="display:none;">
+        <div class="ticket-actions no-print">
+            <button class="btn btn-primary" onclick="printTicket()">
+                <i class="fas fa-print"></i> Print Ticket
+            </button>
+            <button class="btn btn-outline" onclick="downloadTicket()">
+                <i class="fas fa-download"></i> Download as Image
+            </button>
+            <button class="btn btn-outline" onclick="location.reload()">
+                <i class="fas fa-redo"></i> New Ticket
+            </button>
+        </div>
+
+        <div id="boardingPass" class="boarding-pass">
+            <div class="ticket-top">
+                <div class="ticket-logo">
+                    <div class="logo-icon">&#9733;</div>
+                    <div class="logo-text">
+                        <span class="logo-main">CELESTIAL</span>
+                        <span class="logo-sub">VOYAGES</span>
+                    </div>
+                </div>
+                <div class="ticket-title">Boarding Pass</div>
+                <div class="ticket-seat">
+                    <span class="seat-label">Seat</span>
+                    <span class="seat-num" id="dispSeat">1A</span>
+                </div>
+                <div class="ticket-qr" id="qrCodeTop">
+                    <svg viewBox="0 0 100 100" class="qr-svg">
+                        <rect x="0" y="0" width="100" height="100" fill="white"/>
+                        <rect x="5" y="5" width="25" height="25" fill="black"/>
+                        <rect x="10" y="10" width="15" height="15" fill="white"/>
+                        <rect x="13" y="13" width="9" height="9" fill="black"/>
+                        <rect x="70" y="5" width="25" height="25" fill="black"/>
+                        <rect x="75" y="10" width="15" height="15" fill="white"/>
+                        <rect x="78" y="13" width="9" height="9" fill="black"/>
+                        <rect x="5" y="70" width="25" height="25" fill="black"/>
+                        <rect x="10" y="75" width="15" height="15" fill="white"/>
+                        <rect x="13" y="78" width="9" height="9" fill="black"/>
+                        <rect x="35" y="5" width="5" height="5" fill="black"/>
+                        <rect x="45" y="5" width="5" height="5" fill="black"/>
+                        <rect x="55" y="5" width="5" height="5" fill="black"/>
+                        <rect x="35" y="15" width="5" height="5" fill="black"/>
+                        <rect x="50" y="15" width="5" height="5" fill="black"/>
+                        <rect x="60" y="15" width="5" height="5" fill="black"/>
+                        <rect x="40" y="25" width="5" height="5" fill="black"/>
+                        <rect x="55" y="25" width="5" height="5" fill="black"/>
+                        <rect x="35" y="35" width="30" height="30" fill="black"/>
+                        <rect x="40" y="40" width="20" height="20" fill="white"/>
+                        <rect x="45" y="45" width="10" height="10" fill="black"/>
+                        <rect x="5" y="35" width="5" height="5" fill="black"/>
+                        <rect x="15" y="40" width="5" height="5" fill="black"/>
+                        <rect x="25" y="35" width="5" height="5" fill="black"/>
+                        <rect x="70" y="35" width="5" height="5" fill="black"/>
+                        <rect x="80" y="40" width="5" height="5" fill="black"/>
+                        <rect x="90" y="35" width="5" height="5" fill="black"/>
+                        <rect x="70" y="50" width="5" height="5" fill="black"/>
+                        <rect x="85" y="55" width="5" height="5" fill="black"/>
+                        <rect x="75" y="65" width="5" height="5" fill="black"/>
+                        <rect x="90" y="70" width="5" height="5" fill="black"/>
+                        <rect x="35" y="70" width="5" height="5" fill="black"/>
+                        <rect x="50" y="75" width="5" height="5" fill="black"/>
+                        <rect x="60" y="70" width="5" height="5" fill="black"/>
+                        <rect x="45" y="85" width="5" height="5" fill="black"/>
+                        <rect x="55" y="90" width="5" height="5" fill="black"/>
+                        <rect x="70" y="80" width="5" height="5" fill="black"/>
+                        <rect x="80" y="85" width="5" height="5" fill="black"/>
+                        <rect x="90" y="90" width="5" height="5" fill="black"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="ticket-body">
+                <div class="ticket-left-bar">
+                    <div class="barcode-vertical">
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                        <div class="barcode-line"></div><div class="barcode-line"></div>
+                    </div>
+                    <div class="boarding-pass-text">BOARDING PASS</div>
+                </div>
+
+                <div class="ticket-panel left-panel">
+                    <div class="from-to-row">
+                        <div class="from-section">
+                            <span class="label">FROM:</span>
+                            <span class="value" id="dispFrom">EARTH</span>
+                        </div>
+                        <div class="rocket-icon">&#128640;</div>
+                        <div class="to-section">
+                            <span class="label">TO:</span>
+                            <span class="value" id="dispTo">MARS</span>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">PASSENGER NAME:</span>
+                            <span class="value" id="dispName">ARIFUL HASAN</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">FLIGHT NUMBER:</span>
+                            <span class="value" id="dispFlight">M 1236</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">SEAT NUMBER:</span>
+                            <span class="value" id="dispSeat2">1A</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">DATE/TIME:</span>
+                            <span class="value" id="dispDepart">OCT 06, 2050 16:45</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-center-qr">
+                    <svg viewBox="0 0 120 120" class="qr-large">
+                        <rect x="0" y="0" width="120" height="120" fill="white"/>
+                        <rect x="5" y="5" width="30" height="30" fill="black"/>
+                        <rect x="10" y="10" width="20" height="20" fill="white"/>
+                        <rect x="15" y="15" width="10" height="10" fill="black"/>
+                        <rect x="85" y="5" width="30" height="30" fill="black"/>
+                        <rect x="90" y="10" width="20" height="20" fill="white"/>
+                        <rect x="95" y="15" width="10" height="10" fill="black"/>
+                        <rect x="5" y="85" width="30" height="30" fill="black"/>
+                        <rect x="10" y="90" width="20" height="20" fill="white"/>
+                        <rect x="15" y="95" width="10" height="10" fill="black"/>
+                        <rect x="40" y="5" width="10" height="10" fill="black"/>
+                        <rect x="55" y="5" width="10" height="10" fill="black"/>
+                        <rect x="70" y="5" width="10" height="10" fill="black"/>
+                        <rect x="40" y="20" width="10" height="10" fill="black"/>
+                        <rect x="60" y="20" width="10" height="10" fill="black"/>
+                        <rect x="75" y="20" width="10" height="10" fill="black"/>
+                        <rect x="50" y="30" width="10" height="10" fill="black"/>
+                        <rect x="70" y="30" width="10" height="10" fill="black"/>
+                        <rect x="45" y="45" width="30" height="30" fill="black"/>
+                        <rect x="50" y="50" width="20" height="20" fill="white"/>
+                        <rect x="55" y="55" width="10" height="10" fill="black"/>
+                        <rect x="5" y="40" width="10" height="10" fill="black"/>
+                        <rect x="20" y="50" width="10" height="10" fill="black"/>
+                        <rect x="35" y="40" width="10" height="10" fill="black"/>
+                        <rect x="85" y="40" width="10" height="10" fill="black"/>
+                        <rect x="100" y="50" width="10" height="10" fill="black"/>
+                        <rect x="115" y="40" width="5" height="10" fill="black"/>
+                        <rect x="85" y="60" width="10" height="10" fill="black"/>
+                        <rect x="105" y="65" width="10" height="10" fill="black"/>
+                        <rect x="90" y="80" width="10" height="10" fill="black"/>
+                        <rect x="115" y="85" width="5" height="10" fill="black"/>
+                        <rect x="40" y="85" width="10" height="10" fill="black"/>
+                        <rect x="60" y="90" width="10" height="10" fill="black"/>
+                        <rect x="75" y="85" width="10" height="10" fill="black"/>
+                        <rect x="55" y="105" width="10" height="10" fill="black"/>
+                        <rect x="70" y="110" width="10" height="10" fill="black"/>
+                        <rect x="90" y="100" width="10" height="10" fill="black"/>
+                        <rect x="105" y="105" width="10" height="10" fill="black"/>
+                        <rect x="115" y="110" width="5" height="10" fill="black"/>
+                    </svg>
+                </div>
+
+                <div class="ticket-panel right-panel">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">PASSENGER DATE OF BIRTH:</span>
+                            <span class="value" id="dispDob">MAY 16, 2023</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">LAUNCH SITE:</span>
+                            <span class="value" id="dispLaunch">CAPE CANAVERAL</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">LANDING SITE:</span>
+                            <span class="value" id="dispLanding">GUSEV CRATER</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">DATE/TIME:</span>
+                            <span class="value" id="dispLand">JUNE 16, 2051 12:55</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perforation">
+                    <div class="perforation-dots">
+                        <span></span><span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="ticket-stub">
+                    <div class="stub-top">
+                        <div class="stub-logo">
+                            <div class="logo-icon">&#9733;</div>
+                            <div class="logo-text">
+                                <span class="logo-main">CELESTIAL</span>
+                                <span class="logo-sub">VOYAGES</span>
+                            </div>
+                        </div>
+                        <div class="stub-qr">
+                            <svg viewBox="0 0 60 60" class="qr-small">
+                                <rect x="0" y="0" width="60" height="60" fill="white"/>
+                                <rect x="3" y="3" width="15" height="15" fill="black"/>
+                                <rect x="6" y="6" width="9" height="9" fill="white"/>
+                                <rect x="8" y="8" width="5" height="5" fill="black"/>
+                                <rect x="42" y="3" width="15" height="15" fill="black"/>
+                                <rect x="45" y="6" width="9" height="9" fill="white"/>
+                                <rect x="47" y="8" width="5" height="5" fill="black"/>
+                                <rect x="3" y="42" width="15" height="15" fill="black"/>
+                                <rect x="6" y="45" width="9" height="9" fill="white"/>
+                                <rect x="8" y="47" width="5" height="5" fill="black"/>
+                                <rect x="22" y="5" width="5" height="5" fill="black"/>
+                                <rect x="32" y="5" width="5" height="5" fill="black"/>
+                                <rect x="22" y="15" width="5" height="5" fill="black"/>
+                                <rect x="30" y="15" width="5" height="5" fill="black"/>
+                                <rect x="25" y="25" width="10" height="10" fill="black"/>
+                                <rect x="28" y="28" width="4" height="4" fill="white"/>
+                                <rect x="29" y="29" width="2" height="2" fill="black"/>
+                                <rect x="42" y="25" width="5" height="5" fill="black"/>
+                                <rect x="50" y="30" width="5" height="5" fill="black"/>
+                                <rect x="22" y="35" width="5" height="5" fill="black"/>
+                                <rect x="35" y="40" width="5" height="5" fill="black"/>
+                                <rect x="45" y="35" width="5" height="5" fill="black"/>
+                                <rect x="22" y="50" width="5" height="5" fill="black"/>
+                                <rect x="35" y="52" width="5" height="5" fill="black"/>
+                                <rect x="45" y="50" width="5" height="5" fill="black"/>
+                            </svg>
+                        </div>
+                        <div class="stub-seat">
+                            <span class="seat-label">Seat</span>
+                            <span class="seat-num" id="dispSeatStub">1A</span>
+                        </div>
+                    </div>
+                    <div class="stub-body">
+                        <div class="stub-info">
+                            <span class="label">PASSENGER NAME:</span>
+                            <span class="value" id="dispNameStub">ARIFUL HASAN</span>
+                        </div>
+                        <div class="stub-from-to">
+                            <div><span class="label">FROM:</span><span class="value" id="dispFromStub">EARTH</span></div>
+                            <div><span class="label">TO:</span><span class="value" id="dispToStub">MARS</span></div>
+                        </div>
+                        <div class="stub-info">
+                            <span class="label">BOARDING TIME:</span>
+                            <span class="value boarding-time" id="dispBoarding">16:00</span>
+                        </div>
+                        <div class="stub-info">
+                            <span class="label">DATE:</span>
+                            <span class="value" id="dispDateStub">OCT 06, 2050</span>
+                        </div>
+                    </div>
+                    <div class="stub-barcode">
+                        <div class="barcode-h">
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div><div class="barcode-h-line"></div>
+                            <div class="barcode-h-line"></div>
+                        </div>
+                        <span class="barcode-text">CUSTOMIZE YOUR TICKET</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-bg-planet"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="no-print">
+        <div class="footer-content">
+            <p>&copy; 2026 Celestial Voyages. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="space_adventure.html">Adventures</a>
+                <a href="cosmos_classroom.html">Learn</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <p>Designed & Developed by <a href="https://www.linkedin.com/in/jolok-banarjee-16825b1b7/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Jolok Banarjee</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/stars.js"></script>
+    <script src="js/ticket.js"></script>
+    <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

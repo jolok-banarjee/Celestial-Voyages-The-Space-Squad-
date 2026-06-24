@@ -1,66 +1,10 @@
-#user-reviews {
-    background-color: none;
-}
-
-#user-reviews h1 {
-    background-color: none;
-}
-.reviews-section {
-    text-align: center;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.reviews-section h1 {
-    font-size: 32px;
-    margin: 0;
-    color: #333;
-}
-
-.reviews-section p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.reviews {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.review {
-    width: 80%;
-    max-width: 500px;
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    text-align: left;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.user-info img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.review h2 {
-    font-size: 18px;
-    margin: 0;
-    color: #333;
-}
-
-.review p {
-    font-size: 16px;
-    color: #777;
-}
+#user-reviews { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+#user-reviews h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+#user-reviews > p { text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem; font-size: 1.05rem; }
+.reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.review { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; transition: var(--transition); }
+.review:hover { border-color: var(--border-glow); box-shadow: 0 0 30px var(--accent-glow); transform: translateY(-5px); }
+.user-info { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.user-info img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+.user-info h2 { font-size: 1.1rem; color: var(--text-light); margin: 0; }
+.review > p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; font-style: italic; }

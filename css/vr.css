@@ -1,38 +1,15 @@
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.vr-section {
-    display: flex;
-    margin-bottom: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.vr-image img {
-    max-width: 300px;
-    height: auto;
-    margin: 10px;
-}
-
-.vr-description {
-    flex: 1;
-    padding: 20px;
-}
-
-.vr-description h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-}
+.vr-section { display: flex; align-items: center; gap: 2rem; max-width: 1000px; margin: 2rem auto; padding: 2rem; background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; transition: var(--transition); }
+.vr-section:hover { border-color: var(--border-glow); box-shadow: 0 0 30px var(--accent-glow); }
+.vr-section:nth-child(even) { flex-direction: row-reverse; }
+.vr-image { flex: 1; min-width: 300px; }
+.vr-image img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; transition: var(--transition); }
+.vr-section:hover .vr-image img { transform: scale(1.02); }
+.vr-description { flex: 1; min-width: 300px; }
+.vr-description h2 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-light); }
+.vr-description p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; }
+.more-button, .details-button { padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition); margin-right: 0.5rem; }
+.more-button { background: linear-gradient(135deg, var(--accent) 0%, #c73e54 100%); border: none; color: white; }
+.more-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(233,69,96,0.5); }
+.details-button { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+.details-button:hover { background: var(--accent); color: white; }
+@media (max-width: 768px) { .vr-section, .vr-section:nth-child(even) { flex-direction: column; padding: 1.5rem; } .vr-image, .vr-description { min-width: 100%; } }
