@@ -10,6 +10,8 @@
 
 ---
 
+Print your ticket: https://celestial-voyages-the-space-squad.netlify.app/ticket
+
 ## Table of Contents
 
 - [Overview](#-overview)
